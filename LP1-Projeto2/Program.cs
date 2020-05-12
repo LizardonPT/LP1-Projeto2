@@ -10,31 +10,36 @@ namespace LP1_Projeto2
             // Variabels 
 
             string color_turn;
+            string menu_awnser;
+            int menu_action = 0;
 
             // Menu
 
             while(true)
             {
                 Console.WriteLine("Welcome to Felli : The Game");
-                Console.WriteLine("          Start            ");
+                Console.WriteLine("          Play             ");
                 Console.WriteLine("          Rules            ");
                 Console.WriteLine("          Quit             ");
+                
+
                 menu_awnser = Console.ReadLine();
+                MenuOption option = (MenuOption)Enum.Parse(typeof(MenuOption), menu_awnser, true);
 
                 /*
                     Depending of what the player choses, the game may start
                     , show the rules or quit the program.
                     The player can also quit at any moment of the game.
                 */
-                switch (menu_awnser)
+                switch (option)
                 {
-                    case "Start":
+                    case MenuOption.Play:
                         menu_action = 1;
                         break;
-                    case "Rules":
+                    case MenuOption.Rules:
                         menu_action = 2;
                         break;
-                    case "Quit":
+                    case MenuOption.Quit:
                         Console.WriteLine("-----------------------------------");
                         Console.WriteLine("Quitting the game ...");
                         Console.WriteLine("-----------------------------------");
@@ -51,7 +56,7 @@ namespace LP1_Projeto2
                     break;
                 }
 
-                // Show the rules
+                // Shows the rules
 
                 else if (menu_action == 2)
                 {
@@ -70,6 +75,7 @@ namespace LP1_Projeto2
             }
 
             //Create the board (WIP) and show it
+
 
             //Players choose who starts
 
