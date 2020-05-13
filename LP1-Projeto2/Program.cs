@@ -9,11 +9,10 @@ namespace LP1_Projeto2
         {
 
             // Variabels 
-            string color_turn;
             string menu_awnser;
             int menu_action = 0;
             bool color_selection = true;
-            string player1, player2;
+            string player1 = "z";
 
             // Menu
 
@@ -77,7 +76,49 @@ namespace LP1_Projeto2
 
             }
 
-            //Create the board (WIP) and show it
+            //Map creation
+            //Black = 2 e White = 3
+            /* 
+            4 is for the backline that are longer, it will simplify the work
+            for the movement
+            */
+
+            int [,] map = new int [5,9];
+            
+            //Fill the board
+            
+            for(int i=0; i<9; i++)
+            {
+                map[0,i] = 4;
+                map[4,i] = 4;
+            }
+            
+            //Unoccupied case
+
+            map [2,4] = 1;
+
+            //Black starting position
+
+            for(int i=0; i<9; i+=4)
+            {
+                map[0,i] = 2;
+            }
+            for(int i=2; i<7; i+=2)
+            {
+                map[1,i] = 2;
+            }
+
+            //White starting position
+
+            for(int i=0; i<9; i+=4)
+            {
+                map[4,i] = 3;
+            }
+            for(int i=2; i<7; i+=2)
+            {
+                map[3,i] = 3;
+            }            
+            Board(map);
 
             //Players choose who starts
             while (color_selection)
@@ -91,10 +132,12 @@ namespace LP1_Projeto2
                 if (color1 == ColorList.Black)
                 {
                     player1 = "B";
+                    color_selection = false;
                 }
                 else if (color1 == ColorList.White)
                 {
                     player1 = "W";
+                    color_selection = false;
                 }
                 else
                 {
@@ -117,37 +160,37 @@ namespace LP1_Projeto2
                 if (Player1 == "W")
                 {
                     white_turn();
-                    if (PLayer1 == "WIN")
+                    if (Player1 == "WIN")
                     {
-                        Console.WriteLine("Black player win !!!")
-                        Console.WriteLine("Game Over")
+                        Console.WriteLine("Black player win !!!");
+                        Console.WriteLine("Game Over");
                         break;
                     }
                 }
                 else
                 {
                     black_turn();
-                    if (PLayer1 == "WIN")
+                    if (Player1 == "WIN")
                     {
-                        Console.WriteLine("White player win !!!")
-                        Console.WriteLine("Game Over")
+                        Console.WriteLine("White player win !!!");
+                        Console.WriteLine("Game Over");
                         break;
                     }
                 }
             } while (loop);
         }
 
-        static string black_turn() //WIP
+        static void black_turn() //WIP (string)
         {
             /* 
             Need to create a class for the black pieces, then do the possible
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
-            return color_turn;
+            return;
         }
 
-        static string white_turn()//WIP
+        static void white_turn()//WIP (string)
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 
@@ -155,8 +198,37 @@ namespace LP1_Projeto2
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
-            return color_turn;
+            return;
+        }
+
+        //To draw the board
+        static void Board(int [,] map)
+        {
+            for(int x=0; x<5; x++)
+            {
+                for(int y=0; y<9; y++)
+                {
+                    if(map[x,y] == 2)
+                    {
+                        Console.Write("B");
+                    }
+
+                    else if(map[x,y] == 3)
+                    {
+                        Console.Write("W");
+                    }
+
+                    else if(map[x,y] == 1)
+                    {
+                        Console.Write("_");
+                    }
+                    else
+                    {
+                        Console.Write(".");
+                    }
+                }
+                Console.WriteLine("");
+            }
         } 
-        
     }
 }
