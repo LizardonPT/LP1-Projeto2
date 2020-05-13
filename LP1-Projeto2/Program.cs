@@ -63,7 +63,7 @@ namespace LP1_Projeto2
                 else if (menu_action == 2)
                 {
                     Console.WriteLine("-----------------------------------");
-                    Console.Write("Each player chooses a color");
+                    Console.Write("Each player chooses a color ");
                     Console.WriteLine("and you most decide who starts.");
                     Console.Write("You can move only one piece per turn,");
                     Console.Write("it can be moved in one non occupied");
@@ -146,11 +146,11 @@ namespace LP1_Projeto2
             }
 
             //The game itself WIP
-            GameLoop(player1);
+            GameLoop(map, player1);
             
         }
 
-        static void GameLoop(string Player1)
+        static void GameLoop(int [,] map, string Player1)
         {
             bool loop = true;
             do
@@ -159,20 +159,30 @@ namespace LP1_Projeto2
 
                 if (Player1 == "W")
                 {
-                    white_turn();
+
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("White, it's your turn:");
+                    Console.WriteLine("-----------------------------------");
+
+                    white_turn(map, Player1);
                     if (Player1 == "WIN")
                     {
-                        Console.WriteLine("Black player win !!!");
+                        Console.WriteLine("White wins !!!");
                         Console.WriteLine("Game Over");
                         break;
                     }
                 }
                 else
                 {
-                    black_turn();
+
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("Black, it's your turn:");
+                    Console.WriteLine("-----------------------------------");
+
+                    black_turn(map, Player1);
                     if (Player1 == "WIN")
                     {
-                        Console.WriteLine("White player win !!!");
+                        Console.WriteLine("Black wins !!!");
                         Console.WriteLine("Game Over");
                         break;
                     }
@@ -180,17 +190,18 @@ namespace LP1_Projeto2
             } while (loop);
         }
 
-        static void black_turn() //WIP (string)
+        static string black_turn(int [,] map, string player) //WIP (string)
         {
             /* 
-            Need to create a class for the black pieces, then do the possible
+            Need to create a class for the black pieces (maybe, it depends if 
+            the class for the pieces is specified or not), then do the possible
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
             return;
         }
 
-        static void white_turn()//WIP (string)
+        static string white_turn(int [,] map, string Player)//WIP (string)
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 
