@@ -12,16 +12,17 @@ namespace LP1_Projeto2
             string color_turn;
             string menu_awnser;
             int menu_action = 0;
+            bool color_selection = true;
 
             // Menu
 
-            while(true)
+            while (true)
             {
                 Console.WriteLine("Welcome to Felli : The Game");
                 Console.WriteLine("          Play             ");
                 Console.WriteLine("          Rules            ");
                 Console.WriteLine("          Quit             ");
-                
+
 
                 menu_awnser = Console.ReadLine();
                 MenuOption option = (MenuOption)Enum.Parse(typeof(MenuOption), menu_awnser, true);
@@ -62,7 +63,7 @@ namespace LP1_Projeto2
                 {
                     Console.WriteLine("-----------------------------------");
                     Console.Write("Each player chooses a color");
-                    Console.WriteLine("and you most decide who starts."); 
+                    Console.WriteLine("and you most decide who starts.");
                     Console.Write("You can move only one piece per turn,");
                     Console.Write("it can be moved in one non occupied");
                     Console.Write("space or it can leap over an enemy piece,");
@@ -71,51 +72,48 @@ namespace LP1_Projeto2
                     Console.WriteLine("pieces or block them.");
                     Console.WriteLine("-----------------------------------");
                 }
-                
+
             }
 
             //Create the board (WIP) and show it
 
 
             //Players choose who starts
+            while (color_selection)
+            {
+                Console.WriteLine("Choose Starting Color");
+                Console.WriteLine("(Black or White)");
+                string player_color = Console.ReadLine();
+                ColorList color1 = (ColorList)Enum.Parse(typeof(ColorList), player_color, true);
 
-            while((color_turn != "B") || (color_turn != "W"))
-            {
-                Console.WriteLine("Now, choose who starts :");
-                Console.WriteLine("(B for black, W for white)");
-                color_turn = Console.ReadLine().ToUpper();
-                Console.WriteLine("-----------------------------------");
-                if((color_turn == "B") || (color_turn == "W"))
-                {
-                    break;
-                }
+                if (color1 == ColorList.Black || color1 == ColorList.White)
+                    color_selection = false;
                 else
-                {
-                    Console.WriteLine("You must choose B or W, not otherwise.");
-                }
+                    Console.WriteLine("Invalid Color");
             }
+
             //The game itself
-            while(true)
+            while (true)
             {
-                if(color_turn == "B")
+                if (color_turn == "B")
                 {
                     color_turn = black_turn();
 
                     if (color_turn = "WIN")
                     {
-                        Console.WriteLine("Black player win !!!")
-                        Console.WriteLine("Game Over")
+                        Console.WriteLine("Black player win !!!");
+                        Console.WriteLine("Game Over");
                         break;
                     }
                 }
-                if(color_turn == "W")
+                if (color_turn == "W")
                 {
                     color_turn = white_turn();
 
                     if (color_turn = "WIN")
                     {
-                        Console.WriteLine("White player win !!!")
-                        Console.WriteLine("Game Over")
+                        Console.WriteLine("White player win !!!");
+                        Console.WriteLine("Game Over");
                         break;
                     }
                 }
