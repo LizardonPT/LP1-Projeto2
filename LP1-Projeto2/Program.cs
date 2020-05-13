@@ -26,7 +26,8 @@ namespace LP1_Projeto2
 
 
                 menu_awnser = Console.ReadLine();
-                MenuOption option = (MenuOption)Enum.Parse(typeof(MenuOption), menu_awnser, true);
+                MenuOption option = (MenuOption)Enum.Parse(typeof(MenuOption),
+                menu_awnser, true);
 
                 /*
                     Depending of what the player choses, the game may start
@@ -42,9 +43,9 @@ namespace LP1_Projeto2
                         menu_action = 2;
                         break;
                     case MenuOption.Quit:
-                        Console.WriteLine("-----------------------------------");
+                        Console.WriteLine("----------------------------------");
                         Console.WriteLine("Quitting the game ...");
-                        Console.WriteLine("-----------------------------------");
+                        Console.WriteLine("----------------------------------");
                         return;
                 }
 
@@ -78,14 +79,14 @@ namespace LP1_Projeto2
 
             //Create the board (WIP) and show it
 
-
             //Players choose who starts
             while (color_selection)
             {
                 Console.WriteLine("Choose Starting Color");
                 Console.WriteLine("(Black or White)");
                 string player_color = Console.ReadLine();
-                ColorList color1 = (ColorList)Enum.Parse(typeof(ColorList), player_color, true);
+                ColorList color1 = (ColorList)Enum.Parse(typeof(ColorList), 
+                player_color, true);
 
                 if (color1 == ColorList.Black)
                 {
@@ -104,6 +105,36 @@ namespace LP1_Projeto2
             //The game itself WIP
             GameLoop(player1);
             
+        }
+
+        static void GameLoop(string Player1)
+        {
+            bool loop = true;
+            do
+            {
+                //Board()
+
+                if (Player1 == "W")
+                {
+                    white_turn();
+                    if (PLayer1 == "WIN")
+                    {
+                        Console.WriteLine("Black player win !!!")
+                        Console.WriteLine("Game Over")
+                        break;
+                    }
+                }
+                else
+                {
+                    black_turn();
+                    if (PLayer1 == "WIN")
+                    {
+                        Console.WriteLine("White player win !!!")
+                        Console.WriteLine("Game Over")
+                        break;
+                    }
+                }
+            } while (loop);
         }
 
         static string black_turn() //WIP
@@ -126,23 +157,6 @@ namespace LP1_Projeto2
             */
             return color_turn;
         } 
-        static void GameLoop(string Player1)
-        {
-            bool loop = true;
-            do
-            {
-                //Board()
-
-                if (Player1 == "W")
-                    white_turn();
-                else
-                    black_turn();
-                //Board()
-
-                //Verificar se ganhou
-
-
-            } while (loop);
-        }
+        
     }
 }
