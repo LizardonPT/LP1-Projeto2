@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace LP1_Projeto2
 {
@@ -8,11 +9,11 @@ namespace LP1_Projeto2
         {
 
             // Variabels 
-
             string color_turn;
             string menu_awnser;
             int menu_action = 0;
             bool color_selection = true;
+            string player1, player2;
 
             // Menu
 
@@ -86,41 +87,26 @@ namespace LP1_Projeto2
                 string player_color = Console.ReadLine();
                 ColorList color1 = (ColorList)Enum.Parse(typeof(ColorList), player_color, true);
 
-                if (color1 == ColorList.Black || color1 == ColorList.White)
-                    color_selection = false;
+                if (color1 == ColorList.Black)
+                {
+                    player1 = "B";
+                }
+                else if (color1 == ColorList.White)
+                {
+                    player1 = "W";
+                }
                 else
+                {
                     Console.WriteLine("Invalid Color");
-            }
-
-            //The game itself
-            while (true)
-            {
-                if (color_turn == "B")
-                {
-                    color_turn = black_turn();
-
-                    if (color_turn = "WIN")
-                    {
-                        Console.WriteLine("Black player win !!!");
-                        Console.WriteLine("Game Over");
-                        break;
-                    }
-                }
-                if (color_turn == "W")
-                {
-                    color_turn = white_turn();
-
-                    if (color_turn = "WIN")
-                    {
-                        Console.WriteLine("White player win !!!");
-                        Console.WriteLine("Game Over");
-                        break;
-                    }
                 }
             }
+
+            //The game itself WIP
+            GameLoop(player1);
+            
         }
 
-        static string black_turn()
+        static string black_turn() //WIP
         {
             /* 
             Need to create a class for the black pieces, then do the possible
@@ -130,7 +116,7 @@ namespace LP1_Projeto2
             return color_turn;
         }
 
-        static string white_turn()
+        static string white_turn()//WIP
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 
@@ -139,6 +125,24 @@ namespace LP1_Projeto2
             color_turn to change the turn.
             */
             return color_turn;
+        } 
+        static void GameLoop(string Player1)
+        {
+            bool loop = true;
+            do
+            {
+                //Board()
+
+                if (Player1 == "W")
+                    white_turn();
+                else
+                    black_turn();
+                //Board()
+
+                //Verificar se ganhou
+
+
+            } while (loop);
         }
     }
 }
