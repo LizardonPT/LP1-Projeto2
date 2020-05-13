@@ -103,10 +103,17 @@ namespace LP1_Projeto2
             {
                 map[0,i] = 2;
             }
+            Pieces black_piece_1 = new Pieces("BP1", new int[] {0,0});
+            Pieces black_piece_2 = new Pieces("BP2", new int[] {0,4});
+            Pieces black_piece_3 = new Pieces("BP3", new int[] {0,8});
+
             for(int i=2; i<7; i+=2)
             {
                 map[1,i] = 2;
             }
+            Pieces black_piece_4 = new Pieces("BP4", new int[] {1,2});
+            Pieces black_piece_5 = new Pieces("BP5", new int[] {1,4});
+            Pieces black_piece_6 = new Pieces("BP6", new int[] {1,6});
 
             //White starting position
 
@@ -114,10 +121,18 @@ namespace LP1_Projeto2
             {
                 map[4,i] = 3;
             }
+            Pieces white_piece_1 = new Pieces("WP1", new int[] {4,0});
+            Pieces white_piece_2 = new Pieces("WP2", new int[] {4,4});
+            Pieces white_piece_3 = new Pieces("WP3", new int[] {4,8});
+
             for(int i=2; i<7; i+=2)
             {
                 map[3,i] = 3;
             }            
+            Pieces white_piece_4 = new Pieces("WP4", new int[] {3,2});
+            Pieces white_piece_5 = new Pieces("WP5", new int[] {3,4});
+            Pieces white_piece_6 = new Pieces("WP6", new int[] {3,6});
+
             Board(map);
 
             //Players choose who starts
@@ -146,11 +161,14 @@ namespace LP1_Projeto2
             }
 
             //The game itself WIP
-            GameLoop(map, player1);
+            GameLoop(map, player1, black_piece_1, black_piece_2, black_piece_3,
+            black_piece_4, black_piece_5, black_piece_6);
             
         }
 
-        static void GameLoop(int [,] map, string Player1)
+        static void GameLoop(int [,] map, string Player1, Pieces black_piece_1, 
+        Pieces black_piece_2, Pieces black_piece_3, Pieces black_piece_4, 
+        Pieces black_piece_5, Pieces black_piece_6)
         {
             bool loop = true;
             do
@@ -178,8 +196,9 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Black, it's your turn:");
                     Console.WriteLine("-----------------------------------");
-
-                    black_turn(map, Player1);
+                    
+                    black_turn(map, Player1, black_piece_1, black_piece_2, 
+                    black_piece_3,black_piece_4, black_piece_5, black_piece_6);
                     if (Player1 == "WIN")
                     {
                         Console.WriteLine("Black wins !!!");
@@ -190,7 +209,9 @@ namespace LP1_Projeto2
             } while (loop);
         }
 
-        static string black_turn(int [,] map, string player) //WIP (string)
+        static string black_turn(int [,] map, string player, 
+        Pieces black_piece_1, Pieces black_piece_2, Pieces black_piece_3, 
+        Pieces black_piece_4, Pieces black_piece_5, Pieces black_piece_6) 
         {
             /* 
             Need to create a class for the black pieces (maybe, it depends if 
@@ -198,10 +219,194 @@ namespace LP1_Projeto2
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
-            return;
+            bool chosen_piece = false;
+            string piecechosen;
+            int the_piece = 0;
+
+            Board(map);
+
+            Console.WriteLine("Which black piece are you going to move?");
+            Console.Write("|");
+
+            if (black_piece_1.GetAlive())
+            {
+                Console.Write($" {black_piece_1.GetName()} |");
+            }
+            if (black_piece_2.GetAlive())
+            {
+                Console.Write($" {black_piece_2.GetName()} |");
+            }
+            if (black_piece_3.GetAlive())
+            {
+                Console.Write($" {black_piece_3.GetName()} |");
+            }
+            if (black_piece_4.GetAlive())
+            {
+                Console.Write($" {black_piece_4.GetName()} |");
+            }
+            if (black_piece_5.GetAlive())
+            {
+                Console.Write($" {black_piece_5.GetName()} |");
+            }
+            if (black_piece_6.GetAlive())
+            {
+                Console.Write($" {black_piece_6.GetName()} |");
+            }
+
+            Console.WriteLine("");
+            piecechosen = Console.ReadLine();
+            while(chosen_piece != true)
+            {
+                switch (piecechosen)
+                {
+                    case "BP1":
+                        chosen_piece = true;
+                        the_piece = 1;
+                        break;
+                    
+                    case "BP2":
+                        chosen_piece = true;
+                        the_piece = 2;
+                        break;
+                    
+                    case "BP3":
+                        chosen_piece = true;
+                        the_piece = 3;
+                        break;
+                    
+                    case "BP4":
+                        chosen_piece = true;
+                        the_piece = 4;
+                        break;
+                    
+                    case "BP5":
+                        chosen_piece = true;
+                        the_piece = 5;
+                        break;
+
+                    case "BP6":
+                        chosen_piece = true;
+                        the_piece = 6;
+                        break;
+                    
+                    case "Quit":
+                        
+                        break;
+                    
+                    default:
+                        Console.WriteLine("That's not a valid option");
+                        piecechosen = Console.ReadLine();
+                        break;
+                }
+
+                player = blackmovement(map, player, the_piece, black_piece_1, 
+                black_piece_2, black_piece_3, black_piece_4, black_piece_5, 
+                black_piece_6);
+
+                if (player == "A")
+                {
+                    chosen_piece = false;
+                    piecechosen = Console.ReadLine();
+                }
+            }
+
+            return player;
         }
 
-        static string white_turn(int [,] map, string Player)//WIP (string)
+        static string blackmovement( int [,] map, string player, int the_piece,
+        Pieces black_piece_1, Pieces black_piece_2, Pieces black_piece_3, 
+        Pieces black_piece_4, Pieces black_piece_5, Pieces black_piece_6) 
+        {
+            int [] pos = new int[2];
+            int possible_mov = 0;
+
+            if(the_piece == 1)
+            {
+                pos = black_piece_1.GetPos();
+            }
+            if(the_piece == 2)
+            {
+                pos = black_piece_2.GetPos();
+            }
+            if(the_piece == 3)
+            {
+                pos = black_piece_3.GetPos();
+            }
+            if(the_piece == 4)
+            {
+                pos = black_piece_4.GetPos();
+            }
+            if(the_piece == 5)
+            {
+                pos = black_piece_5.GetPos();
+            }
+            if(the_piece == 6)
+            {
+                pos = black_piece_6.GetPos();
+            }
+
+            Console.WriteLine("Doable Movements :");
+            for(int x=-1; x<2; x++)
+            {
+                for(int y =-2; y<3; y+= 2)
+                {
+                    if((pos[0]+x > -1) && (pos[0]+x < 5) && (pos[1]+y > -1) 
+                    && (pos[1]+y < 9))
+                    {
+                        if ((map[pos[0]+x,pos[1]+y] == 4) && ((pos[0] == 0) ||
+                        (pos[0] == 4)))
+                        {
+                            if (map[pos[0]+x,pos[1]+(y*2)] == 3 && 
+                            (pos[1]+(y*4) > -1) && (pos[1]+(y*4) < 9))
+                            {
+                                if (map[pos[0]+x,pos[1]+(y*4)] == 1)
+                                {
+                                    Console.WriteLine(
+                                    $"{pos[0]+x}, {pos[1]+(y*4)}");
+                                    map[pos[0]+x,pos[1]+(y*4)] = 5;
+                                    possible_mov += 1;
+                                }
+                            }
+                            if (map[pos[0]+x,pos[1]+(y*2)] == 1)
+                            {
+                                Console.WriteLine(
+                                $"{pos[0]+x}, {pos[1]+(y*2)}");
+                                map[pos[0]+x,pos[1]+(y*2)] = 5;
+                                possible_mov += 1;
+                            }
+                        }
+                        else if ((map[pos[0]+x,pos[1]+y] == 3) && 
+                        ((pos[0]+(x*2) > -1) && (pos[0]+(x*2) < 5) && 
+                        (pos[1]+(y*2) > -1) && (pos[1]+(y*2) < 9)))
+                        {
+                            if (map[pos[0]+(x*2),pos[1]+(y*2)] == 1)
+                            {
+                                Console.WriteLine(
+                                $"{pos[0]+(x*2)}, {pos[1]+(y*2)}");
+                                map[pos[0]+(x*2),pos[1]+(y*2)] = 5;
+                                possible_mov += 1;
+                            }
+                        }
+                        else if (map[pos[0]+x,pos[1]+(y)] == 1)
+                        {
+                            Console.WriteLine($"{pos[0]+x}, {pos[1]+y}");
+                            map[pos[0]+x,pos[1]+y] = 5;
+                            possible_mov += 1;
+                        }
+                    }
+                }
+            }
+
+            player = "W";
+
+
+            return player;
+        }
+
+
+
+
+        static void white_turn(int [,] map, string Player)//WIP (string)
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 

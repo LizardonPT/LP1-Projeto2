@@ -8,18 +8,14 @@ namespace LP1_Projeto2
 
         public Pieces(string name ,int [] pos)
         {
-            SetName(name);
-            SetPos(pos);
+            this.name = name;
+            this.pos = pos;
             alive = true;
         }
 
         public string GetName()
         {
             return name;
-        }
-        public void SetName(string name)
-        {
-            this.name = name;
         }
 
         public int [] GetPos()
