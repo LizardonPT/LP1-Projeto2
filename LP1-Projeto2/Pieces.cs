@@ -32,5 +32,9 @@ namespace LP1_Projeto2
             return alive;
         }
 
+        public void SetAlive(bool alive)
+        {
+            this.alive = alive;
+        }
     }
 }
