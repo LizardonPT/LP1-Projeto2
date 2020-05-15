@@ -365,7 +365,7 @@ namespace LP1_Projeto2
 
             /*Will analyze the surroundings of the selected piece and say
             what's the movements the player can do*/
-            Console.WriteLine("Doable Movements :");
+            //Console.WriteLine("Doable Movements :");
 
             //Analyze the line in x coordinates
             for(int x=-1; x<2; x++)
@@ -391,6 +391,7 @@ namespace LP1_Projeto2
                                 enemy, so the player can eat the enemy piece*/
                                 if (map[pos[0]+x,pos[1]+(y*4)] == 1)
                                 {
+                                    Console.WriteLine("Doable Movements :");
                                     Console.WriteLine(
                                     $"{pos[0]+x}, {pos[1]+(y*4)}");
                                     map[pos[0]+x,pos[1]+(y*4)] = 5;
@@ -401,6 +402,7 @@ namespace LP1_Projeto2
                             piece in the back line*/
                             if (map[pos[0]+x,pos[1]+(y*2)] == 1)
                             {
+                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0]+x}, {pos[1]+(y*2)}");
                                 map[pos[0]+x,pos[1]+(y*2)] = 5;
@@ -417,6 +419,7 @@ namespace LP1_Projeto2
                             can eat the white piece*/
                             if (map[pos[0]+(x*2),pos[1]+(y*2)] == 1)
                             {
+                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0]+(x*2)}, {pos[1]+(y*2)}");
                                 map[pos[0]+(x*2),pos[1]+(y*2)] = 5;
@@ -427,19 +430,26 @@ namespace LP1_Projeto2
                         lines*/
                         else if (map[pos[0]+x,pos[1]+(y)] == 1)
                         {
+                            Console.WriteLine("Doable Movements :");
                             Console.WriteLine($"{pos[0]+x}, {pos[1]+y}");
                             map[pos[0]+x,pos[1]+y] = 5;
                             possible_mov += 1;
                         }
-
                     }
                 }
             }
-            
+
+            if(possible_mov == 0)
+            {
+                Console.Write("You can't move that one... Try another one.\n");
+                player = black_turn(map, player, black_piece_1, black_piece_2, 
+                black_piece_3,black_piece_4, black_piece_5, black_piece_6);
+            }
+
             /*string coord = Console.ReadLine();
             if(coord == "2, 4" || coord == "2,4")
             {
-                pos = 
+                 
                 //escrever o q aconteceu
             }*/
 
