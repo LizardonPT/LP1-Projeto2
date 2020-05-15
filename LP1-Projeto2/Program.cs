@@ -26,28 +26,37 @@ namespace LP1_Projeto2
 
 
                 menu_awnser = Console.ReadLine();
-                MenuOption option = (MenuOption)Enum.Parse(typeof(MenuOption),
-                menu_awnser, true);
-
-                /*
-                    Depending of what the player choses, the game may start
-                    , show the rules or quit the program.
-                    The player can also quit at any moment of the game.
-                */
-                switch (option)
+                MenuEnum option; 
+                if(Enum.TryParse( menu_awnser, true, out option ))
                 {
-                    case MenuOption.Play:
-                        menu_action = 1;
-                        break;
-                    case MenuOption.Rules:
-                        menu_action = 2;
-                        break;
-                    case MenuOption.Quit:
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("Quitting the game ...");
-                        Console.WriteLine("----------------------------------");
-                        return;
+                    /*
+                        Depending of what the player choses, the game may start
+                        , show the rules or quit the program.
+                        The player can also quit at any moment of the game.
+                    */
+                    switch (option)
+                    {
+                        case MenuEnum.Play:
+                            menu_action = 1;
+                            break;
+                        case MenuEnum.Rules:
+                            menu_action = 2;
+                            break;
+                        case MenuEnum.Quit:
+                            Console.WriteLine("----------------------------------");
+                            Console.WriteLine("Quitting the game ...");
+                            Console.WriteLine("----------------------------------");
+                            return;
+
+                    }
+                 
                 }
+                else
+                {
+                    Console.WriteLine("Unvalid option please try again.");
+                    continue;
+                }
+
 
                 // The game starts
 
@@ -141,15 +150,15 @@ namespace LP1_Projeto2
                 Console.WriteLine("Choose Starting Color");
                 Console.WriteLine("(Black or White)");
                 string player_color = Console.ReadLine();
-                ColorList color1 = (ColorList)Enum.Parse(typeof(ColorList), 
+                ColorEnum color1 = (ColorEnum)Enum.Parse(typeof(ColorEnum), 
                 player_color, true);
 
-                if (color1 == ColorList.Black)
+                if (color1 == ColorEnum.Black)
                 {
                     player1 = "B";
                     color_selection = false;
                 }
-                else if (color1 == ColorList.White)
+                else if (color1 == ColorEnum.White)
                 {
                     player1 = "W";
                     color_selection = false;
@@ -276,7 +285,7 @@ namespace LP1_Projeto2
             //Checks if the input is valid, if not, the user needs to try again
             while(chosen_piece != true)
             {
-                switch (piecechosen)
+                switch (piecechosen.ToUpper())
                 {
                     case "BP1":
                         chosen_piece = true;
@@ -308,7 +317,7 @@ namespace LP1_Projeto2
                         the_piece = 6;
                         break;
                     
-                    case "Quit":
+                    case "QUIT":
                         
                         break;
                     
