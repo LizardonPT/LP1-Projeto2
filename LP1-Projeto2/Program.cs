@@ -365,7 +365,6 @@ namespace LP1_Projeto2
 
             /*Will analyze the surroundings of the selected piece and say
             what's the movements the player can do*/
-            //Console.WriteLine("Doable Movements :");
 
             //Analyze the line in x coordinates
             for(int x=-1; x<2; x++)
@@ -439,6 +438,7 @@ namespace LP1_Projeto2
                 }
             }
 
+            //Checks if the player can move the chosen piece
             if(possible_mov == 0)
             {
                 Console.Write("You can't move that one... Try another one.\n");
@@ -446,12 +446,41 @@ namespace LP1_Projeto2
                 black_piece_3,black_piece_4, black_piece_5, black_piece_6);
             }
 
-            /*string coord = Console.ReadLine();
-            if(coord == "2, 4" || coord == "2,4")
-            {
-                 
-                //escrever o q aconteceu
-            }*/
+            
+            
+            else if(possible_mov != 0)
+            {   
+                Console.Write("x = ");
+                string coordx = Console.ReadLine();
+                Console.Write("y = ");
+                string coordy = Console.ReadLine();
+                int coordxnumb = int.Parse(coordx);
+                int coordynumb = int.Parse(coordy);
+
+                if((coordxnumb > -1) && (coordxnumb < 5) && (coordynumb > -1) && 
+                (coordynumb < 9))
+                {
+                    if(map[coordxnumb,coordynumb] == 5)
+                    {
+                        map[pos[0],pos[1]] = 1;
+                        pos[0] = coordxnumb;
+                        pos[1] = coordynumb;
+                        map[coordxnumb, coordynumb] = 2;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("That's not a valid option... Use one of the options");
+                    }
+                    
+                }
+
+                else
+                {
+                    Console.WriteLine("That's not a valid option... Use one of the options");
+                }
+                
+            }
 
             player = "W";
 
