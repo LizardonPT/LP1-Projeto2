@@ -13,6 +13,7 @@ namespace LP1_Projeto2
             int menu_action = 0;
             bool color_selection = true;
             string player1 = "z";
+            int [,] map = new int [5,9];
 
             // Menu
 
@@ -82,8 +83,6 @@ namespace LP1_Projeto2
             4 is for the backline that are longer, it will simplify the work
             for the movement
             */
-
-            int [,] map = new int [5,9];
             
             //Fill the board
             
@@ -133,6 +132,7 @@ namespace LP1_Projeto2
             Pieces white_piece_5 = new Pieces("WP5", new int[] {3,4});
             Pieces white_piece_6 = new Pieces("WP6", new int[] {3,6});
 
+            //Draws the board on the console
             Board(map);
 
             //Players choose who starts
@@ -166,6 +166,7 @@ namespace LP1_Projeto2
             
         }
 
+        //Method to mantain the game working
         static void GameLoop(int [,] map, string Player1, Pieces black_piece_1, 
         Pieces black_piece_2, Pieces black_piece_3, Pieces black_piece_4, 
         Pieces black_piece_5, Pieces black_piece_6)
@@ -174,6 +175,8 @@ namespace LP1_Projeto2
             do
             {
                 //Board()
+                /*Checks what was the player choice for the starting color and
+                and write a text saying ho's going to play that turn*/
 
                 if (Player1 == "W")
                 {
@@ -182,7 +185,10 @@ namespace LP1_Projeto2
                     Console.WriteLine("White, it's your turn:");
                     Console.WriteLine("-----------------------------------");
 
+                    //Calls the method for the white turn
                     white_turn(map, Player1);
+                    
+                    //Condition to see if the player with the white pieces won
                     if (Player1 == "WIN")
                     {
                         Console.WriteLine("White wins !!!");
@@ -190,15 +196,18 @@ namespace LP1_Projeto2
                         break;
                     }
                 }
-                else
+                else if (Player1 == "B")
                 {
 
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Black, it's your turn:");
                     Console.WriteLine("-----------------------------------");
                     
+                    //Calls the method for the black turn
                     black_turn(map, Player1, black_piece_1, black_piece_2, 
                     black_piece_3,black_piece_4, black_piece_5, black_piece_6);
+
+                    //Condition to see if the player with the black pieces won
                     if (Player1 == "WIN")
                     {
                         Console.WriteLine("Black wins !!!");
@@ -209,6 +218,7 @@ namespace LP1_Projeto2
             } while (loop);
         }
 
+        //Method to make all the black turn process steps
         static string black_turn(int [,] map, string player, 
         Pieces black_piece_1, Pieces black_piece_2, Pieces black_piece_3, 
         Pieces black_piece_4, Pieces black_piece_5, Pieces black_piece_6) 
@@ -219,12 +229,17 @@ namespace LP1_Projeto2
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
+
+            //Variables of the method
             bool chosen_piece = false;
             string piecechosen;
             int the_piece = 0;
 
+            //Draws the board on the console
             Board(map);
 
+            /*Checks which black pieces are alive and asks the player which one
+            he wants to move*/
             Console.WriteLine("Which black piece are you going to move?");
             Console.Write("|");
 
@@ -254,7 +269,11 @@ namespace LP1_Projeto2
             }
 
             Console.WriteLine("");
+
+            //Reads the input of the player
             piecechosen = Console.ReadLine();
+
+            //Checks if the input is valid, if not, the user needs to try again
             while(chosen_piece != true)
             {
                 switch (piecechosen)
@@ -303,23 +322,22 @@ namespace LP1_Projeto2
                 black_piece_2, black_piece_3, black_piece_4, black_piece_5, 
                 black_piece_6);
 
-                if (player == "A")
-                {
-                    chosen_piece = false;
-                    piecechosen = Console.ReadLine();
-                }
+                
             }
 
             return player;
         }
 
+        //Method that will make the black pieces move in the game
         static string blackmovement( int [,] map, string player, int the_piece,
         Pieces black_piece_1, Pieces black_piece_2, Pieces black_piece_3, 
         Pieces black_piece_4, Pieces black_piece_5, Pieces black_piece_6) 
         {
+            //Variables of the method
             int [] pos = new int[2];
             int possible_mov = 0;
-
+            
+            //Gets the position in the board of the piece chosen by the player
             if(the_piece == 1)
             {
                 pos = black_piece_1.GetPos();
@@ -345,20 +363,32 @@ namespace LP1_Projeto2
                 pos = black_piece_6.GetPos();
             }
 
+            /*Will analyze the surroundings of the selected piece and say
+            what's the movements the player can do*/
             Console.WriteLine("Doable Movements :");
+
+            //Analyze the line in x coordinates
             for(int x=-1; x<2; x++)
             {
+                //Analyze the line in y coordinates
                 for(int y =-2; y<3; y+= 2)
                 {
+                    /*Checks if the closest spaces to the chosen piece are
+                    in the board*/
                     if((pos[0]+x > -1) && (pos[0]+x < 5) && (pos[1]+y > -1) 
                     && (pos[1]+y < 9))
                     {
+                        //Checks if the chosen pice is in the backline 
                         if ((map[pos[0]+x,pos[1]+y] == 4) && ((pos[0] == 0) ||
                         (pos[0] == 4)))
                         {
+                            /*Checks if there is any enemy piece in the
+                            back line*/
                             if (map[pos[0]+x,pos[1]+(y*2)] == 3 && 
                             (pos[1]+(y*4) > -1) && (pos[1]+(y*4) < 9))
                             {
+                                /*Checks if there is any free space after the
+                                enemy, so the player can eat the enemy piece*/
                                 if (map[pos[0]+x,pos[1]+(y*4)] == 1)
                                 {
                                     Console.WriteLine(
@@ -367,6 +397,8 @@ namespace LP1_Projeto2
                                     possible_mov += 1;
                                 }
                             }
+                            /*Checks if there is any free space to move the
+                            piece in the back line*/
                             if (map[pos[0]+x,pos[1]+(y*2)] == 1)
                             {
                                 Console.WriteLine(
@@ -375,10 +407,14 @@ namespace LP1_Projeto2
                                 possible_mov += 1;
                             }
                         }
+                        /*Checks if its a white piece and if the surrounding
+                        is in the board*/
                         else if ((map[pos[0]+x,pos[1]+y] == 3) && 
                         ((pos[0]+(x*2) > -1) && (pos[0]+(x*2) < 5) && 
                         (pos[1]+(y*2) > -1) && (pos[1]+(y*2) < 9)))
                         {
+                            /*Checks if that surrounding is free so the player
+                            can eat the white piece*/
                             if (map[pos[0]+(x*2),pos[1]+(y*2)] == 1)
                             {
                                 Console.WriteLine(
@@ -387,15 +423,25 @@ namespace LP1_Projeto2
                                 possible_mov += 1;
                             }
                         }
+                        /*Checks if there is any free space in the rest of the
+                        lines*/
                         else if (map[pos[0]+x,pos[1]+(y)] == 1)
                         {
                             Console.WriteLine($"{pos[0]+x}, {pos[1]+y}");
                             map[pos[0]+x,pos[1]+y] = 5;
                             possible_mov += 1;
                         }
+
                     }
                 }
             }
+            
+            /*string coord = Console.ReadLine();
+            if(coord == "2, 4" || coord == "2,4")
+            {
+                pos = 
+                //escrever o q aconteceu
+            }*/
 
             player = "W";
 
