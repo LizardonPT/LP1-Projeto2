@@ -20,3 +20,5 @@
 
 ### Referências (WIP)
 https://stackoverflow.com/questions/16100/convert-a-string-to-an-enum-in-c-sharp
+https://stackoverflow.com/questions/17400617/very-basic-use-of-enum-tryparse-doesnt-work
+https://stackoverflow.com/questions/1082532/how-to-tryparse-for-enum-value
