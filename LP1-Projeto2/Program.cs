@@ -219,12 +219,13 @@ namespace LP1_Projeto2
 
                     
                     //Condition to see if the player with the white pieces won
-                    if (Player == "WIN")
-                    {
+                    
+                   if (WhiteWinVerification(ref black_piece_1, ref black_piece_2, ref black_piece_3, ref black_piece_4, ref black_piece_5, ref black_piece_6))
+                   {
                         Console.WriteLine("White wins !!!");
                         Console.WriteLine("Game Over");
                         break;
-                    }
+                   }
                 }
                 else if (Player == "B")
                 {
@@ -239,7 +240,9 @@ namespace LP1_Projeto2
                     ref black_piece_6);
 
                     //Condition to see if the player with the black pieces won
-                    if (Player == "WIN")
+                    if ((BlackWinVerification(ref white_piece_1,
+                    ref white_piece_2, ref white_piece_3, ref white_piece_4,
+                    ref white_piece_5, ref white_piece_6)))
                     {
                         Console.WriteLine("Black wins !!!");
                         Console.WriteLine("Game Over");
@@ -1178,6 +1181,30 @@ namespace LP1_Projeto2
                 }
                 Console.WriteLine("");
             }
-        } 
+        }
+        
+
+        static bool BlackWinVerification(ref Pieces white_piece_1,
+        ref Pieces white_piece_2, ref Pieces white_piece_3,
+        ref Pieces white_piece_4, ref Pieces white_piece_5,
+        ref Pieces white_piece_6)
+        {
+            if (!white_piece_1.GetAlive() && !white_piece_2.GetAlive() && !white_piece_3.GetAlive() && !white_piece_4.GetAlive() && !white_piece_5.GetAlive() && !white_piece_6.GetAlive())
+            {
+                Console.Write("Black Wins!");
+                return true;
+            }
+            return false;
+        }
+
+        static bool WhiteWinVerification(ref Pieces black_piece_1, ref Pieces black_piece_2, ref Pieces black_piece_3, ref Pieces black_piece_4, ref Pieces black_piece_5, ref Pieces black_piece_6)
+        {
+            if (!black_piece_1.GetAlive() && !black_piece_2.GetAlive() && !black_piece_3.GetAlive() && !black_piece_4.GetAlive() && !black_piece_5.GetAlive() && !black_piece_6.GetAlive())
+            {
+                Console.Write("White Wins!");
+                return true;
+            }
+            return false;
+        }
     }
 }
