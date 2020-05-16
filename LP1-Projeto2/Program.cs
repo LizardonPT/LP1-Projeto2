@@ -194,6 +194,7 @@ namespace LP1_Projeto2
         ref Pieces white_piece_3, ref Pieces white_piece_4, 
         ref Pieces white_piece_5, ref Pieces white_piece_6)
         {
+            bool winning = false;
             bool loop = true;
             do
             {
@@ -207,6 +208,17 @@ namespace LP1_Projeto2
 
                 if (Player == "W")
                 {
+                    //Condition to see if the player with the black pieces won
+
+                    winning = (BlackWinVerification(ref white_piece_1,
+                    ref white_piece_2, ref white_piece_3, ref white_piece_4,
+                    ref white_piece_5, ref white_piece_6));
+
+                    if (winning)
+                    {
+                        Console.WriteLine("Game Over");
+                        break;
+                    }
 
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("White, it's your turn:");
@@ -220,34 +232,32 @@ namespace LP1_Projeto2
                     
                     //Condition to see if the player with the white pieces won
                     
-                   if (WhiteWinVerification(ref black_piece_1, ref black_piece_2, ref black_piece_3, ref black_piece_4, ref black_piece_5, ref black_piece_6))
-                   {
-                        Console.WriteLine("White wins !!!");
-                        Console.WriteLine("Game Over");
-                        break;
-                   }
                 }
                 else if (Player == "B")
                 {
+                    //Condition to see if the player with the white pieces won
+
+                    winning = WhiteWinVerification(ref black_piece_1, 
+                    ref black_piece_2, ref black_piece_3, ref black_piece_4, 
+                    ref black_piece_5, ref black_piece_6);
+
+                    if (winning)
+                    {
+                            Console.WriteLine("Game Over");
+                            break;
+                    }
 
                     Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Black, it's your turn:");
                     Console.WriteLine("-----------------------------------");
                     
                     //Calls the method for the black turn
-                    Player = BlackTurn(ref map, Player,ref black_piece_1,ref black_piece_2, 
-                    ref black_piece_3, ref black_piece_4, ref black_piece_5, 
-                    ref black_piece_6);
+                    Player = BlackTurn(ref map, Player,ref black_piece_1,
+                    ref black_piece_2, ref black_piece_3, ref black_piece_4, 
+                    ref black_piece_5, ref black_piece_6);
 
                     //Condition to see if the player with the black pieces won
-                    if ((BlackWinVerification(ref white_piece_1,
-                    ref white_piece_2, ref white_piece_3, ref white_piece_4,
-                    ref white_piece_5, ref white_piece_6)))
-                    {
-                        Console.WriteLine("Black wins !!!");
-                        Console.WriteLine("Game Over");
-                        break;
-                    }
+
                 }
             } while (loop);
         }
@@ -419,7 +429,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "QUIT":
-                        
+                        Console.WriteLine("-------------------");
                         Console.WriteLine("Quiting the game...");
                         Console.WriteLine("-------------------");
                         break;
@@ -436,8 +446,8 @@ namespace LP1_Projeto2
         }
 
         //Method that will make the black pieces move in the game
-        static string BlackMovement(ref int [,] map, string player, int the_piece,
-        ref Pieces black_piece_1, ref Pieces black_piece_2, 
+        static string BlackMovement(ref int [,] map, string player, 
+        int the_piece, ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6) 
         {
@@ -816,9 +826,10 @@ namespace LP1_Projeto2
                         }
 
                     case "QUIT":
-
+                        Console.WriteLine("-------------------");
                         Console.WriteLine("Quiting the game...");
                         Console.WriteLine("-------------------");
+                        chosen_piece = true;
                         break;
 
                     default:
@@ -833,8 +844,8 @@ namespace LP1_Projeto2
         }
 
         //Method that will make the black pieces move in the game
-        static string WhiteMovement(ref int[,] map, string player, int the_piece,
-        ref Pieces white_piece_1, ref Pieces white_piece_2,
+        static string WhiteMovement(ref int[,] map, string player, 
+        int the_piece, ref Pieces white_piece_1, ref Pieces white_piece_2,
         ref Pieces white_piece_3, ref Pieces white_piece_4,
         ref Pieces white_piece_5, ref Pieces white_piece_6)
         {
@@ -883,12 +894,12 @@ namespace LP1_Projeto2
                 {
                     /*Checks if the closest spaces to the chosen piece are
                     in the board*/
-                    if ((pos[0] + x > -1) && (pos[0] + x < 5) && (pos[1] + y > -1)
-                    && (pos[1] + y < 9))
+                    if ((pos[0] + x > -1) && (pos[0] + x < 5) && 
+                    (pos[1] + y > -1) && (pos[1] + y < 9))
                     {
                         //Checks if the chosen pice is in the backline 
-                        if ((map[pos[0] + x, pos[1] + y] == 4) && ((pos[0] == 0) ||
-                        (pos[0] == 4)))
+                        if ((map[pos[0] + x, pos[1] + y] == 4) && 
+                        ((pos[0] == 0) || (pos[0] == 4)))
                         {
                             /*Checks if there is any enemy piece in the
                             back line*/
@@ -978,7 +989,7 @@ namespace LP1_Projeto2
                                 {
                                     for(int y=0; y<9; y++)
                                     {
-                                        if(map[x,y] == 2)
+                                        if(map[x,y] == 6)
                                         {
                                             map[x,y] = 2;
                                         }
@@ -1058,125 +1069,149 @@ namespace LP1_Projeto2
             //Variable
             int [] analyze = new int [2];
             int [] pos;
+            int i = 0;
 
             //Write the board
-            for(int x=0; x<5; x++)
+            for(int x=0; x<7; x++)
             {
-                for(int y=0; y<9; y++)
+                if(x == 0)
                 {
-
-                    //This is a black piece case
-                    if(map[x,y] == 2)
+                    Console.Write("  012345678");
+                }
+                if(x == 1)
+                {
+                    Console.Write(" ----------");
+                }
+                for(int y=0; y<11; y++)
+                {
+                    if((x == 0) || (x == 1))
                     {
-                        Console.Write("B");
+                        break;
                     }
-
-                    //This is a white piece case
-                    else if(map[x,y] == 3)
+                    else if ((y == 0) && (x > 0))
                     {
-                        Console.Write("W");
+                        Console.Write(i);
+                        i++;
                     }
-
-                    //This was a possible position for the chosen piece  
-                    else if((map[x,y] == 5) || (map[x,y] == 7))
+                    else if ((y == 1) && (x > 0))
                     {
-                        map[x,y] = 1;
-                        Console.Write("+");
+                        Console.Write("|");
                     }
-                    
-                    //This is the position of a dead piece
-                    else if(map[x,y] == 6)
-                    {
-                        map[x,y] = 1;
-                        Console.Write("+");
-                        analyze[0] = x;
-                        analyze[1] = y;
-
-                        //This part will "delete" the piece from the choose list
-                        pos = black_piece_1.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_1.SetAlive(false);
-                        }
-                        pos = black_piece_2.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_2.SetAlive(false);
-                        }
-                        pos = black_piece_3.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_3.SetAlive(false);
-                        }
-                        pos = black_piece_4.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_4.SetAlive(false);
-                        }
-                        pos = black_piece_5.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_5.SetAlive(false);
-                        }
-                        pos = black_piece_6.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            black_piece_6.SetAlive(false);
-                        }
-                        pos = white_piece_1.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_1.SetAlive(false);
-                        }
-                        pos = white_piece_2.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_2.SetAlive(false);
-                        }
-                        pos = white_piece_3.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_3.SetAlive(false);
-                        }
-                        pos = white_piece_4.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_4.SetAlive(false);
-                        }
-                        pos = white_piece_5.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_5.SetAlive(false);
-                        }
-                        pos = white_piece_6.GetPos();
-                        if((pos[0] == analyze[0]) && 
-                        (pos[1] == analyze[1]))
-                        {
-                            white_piece_6.SetAlive(false);
-                        }
-                    }
-
-                    //This is a free case
-                    else if(map[x,y] == 1)
-                    {
-                        Console.Write("+");
-                    }
-
-                    //This is a non playable case from the board
                     else
                     {
-                        Console.Write(" ");
+                        //This is a black piece case
+                        if(map[x-2,y-2] == 2)
+                        {
+                            Console.Write("B");
+                        }
+
+                        //This is a white piece case
+                        else if(map[x-2,y-2] == 3)
+                        {
+                            Console.Write("W");
+                        }
+
+                        //This was a possible position for the chosen piece  
+                        else if((map[x-2,y-2] == 5) || (map[x-2,y-2] == 7))
+                        {
+                            map[x-2,y-2] = 1;
+                            Console.Write("+");
+                        }
+                        
+                        //This is the position of a dead piece
+                        else if(map[x-2,y-2] == 6)
+                        {
+                            map[x-2,y-2] = 1;
+                            Console.Write("+");
+                            analyze[0] = x;
+                            analyze[1] = y;
+
+                            //This part will "delete" the piece from the choose list
+                            pos = black_piece_1.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_1.SetAlive(false);
+                            }
+                            pos = black_piece_2.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_2.SetAlive(false);
+                            }
+                            pos = black_piece_3.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_3.SetAlive(false);
+                            }
+                            pos = black_piece_4.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_4.SetAlive(false);
+                            }
+                            pos = black_piece_5.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_5.SetAlive(false);
+                            }
+                            pos = black_piece_6.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                black_piece_6.SetAlive(false);
+                            }
+                            pos = white_piece_1.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_1.SetAlive(false);
+                            }
+                            pos = white_piece_2.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_2.SetAlive(false);
+                            }
+                            pos = white_piece_3.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_3.SetAlive(false);
+                            }
+                            pos = white_piece_4.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_4.SetAlive(false);
+                            }
+                            pos = white_piece_5.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_5.SetAlive(false);
+                            }
+                            pos = white_piece_6.GetPos();
+                            if((pos[0] == analyze[0]) && 
+                            (pos[1] == analyze[1]))
+                            {
+                                white_piece_6.SetAlive(false);
+                            }
+                        }
+
+                        //This is a free case
+                        else if(map[x-2,y-2] == 1)
+                        {
+                            Console.Write("+");
+                        }
+
+                        //This is a non playable case from the board
+                        else
+                        {
+                            Console.Write(" ");
+                        }
                     }
                 }
                 Console.WriteLine("");
@@ -1189,22 +1224,35 @@ namespace LP1_Projeto2
         ref Pieces white_piece_4, ref Pieces white_piece_5,
         ref Pieces white_piece_6)
         {
-            if (!white_piece_1.GetAlive() && !white_piece_2.GetAlive() && !white_piece_3.GetAlive() && !white_piece_4.GetAlive() && !white_piece_5.GetAlive() && !white_piece_6.GetAlive())
+            if ((white_piece_1.GetAlive()) || (white_piece_2.GetAlive()) || 
+            (white_piece_3.GetAlive()) || (white_piece_4.GetAlive()) || 
+            (white_piece_5.GetAlive()) || (white_piece_6.GetAlive()))
+            {
+                return false;
+            }
+            else
             {
                 Console.Write("Black Wins!");
                 return true;
             }
-            return false;
         }
 
-        static bool WhiteWinVerification(ref Pieces black_piece_1, ref Pieces black_piece_2, ref Pieces black_piece_3, ref Pieces black_piece_4, ref Pieces black_piece_5, ref Pieces black_piece_6)
+        static bool WhiteWinVerification(ref Pieces black_piece_1, 
+        ref Pieces black_piece_2, ref Pieces black_piece_3, 
+        ref Pieces black_piece_4, ref Pieces black_piece_5, 
+        ref Pieces black_piece_6)
         {
-            if (!black_piece_1.GetAlive() && !black_piece_2.GetAlive() && !black_piece_3.GetAlive() && !black_piece_4.GetAlive() && !black_piece_5.GetAlive() && !black_piece_6.GetAlive())
+            if ((black_piece_1.GetAlive()) || (black_piece_2.GetAlive()) || 
+            (black_piece_3.GetAlive()) || (black_piece_4.GetAlive()) || 
+            (black_piece_5.GetAlive()) || (black_piece_6.GetAlive()))
             {
-                Console.Write("White Wins!");
+                return false;
+            }
+            else
+            {
+                Console.Write("Black Wins!");
                 return true;
             }
-            return false;
         }
     }
 }
