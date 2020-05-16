@@ -213,7 +213,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    WhiteTurn(map, Player, ref white_piece_1,
+                    Player = WhiteTurn(map, Player, ref white_piece_1,
                     ref white_piece_2, ref white_piece_3, ref white_piece_4,
                     ref white_piece_5, ref white_piece_6);
 
@@ -234,7 +234,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
                     
                     //Calls the method for the black turn
-                    BlackTurn(map, Player,ref black_piece_1,ref black_piece_2, 
+                    Player = BlackTurn(map, Player,ref black_piece_1,ref black_piece_2, 
                     ref black_piece_3, ref black_piece_4, ref black_piece_5, 
                     ref black_piece_6);
 
@@ -607,9 +607,9 @@ namespace LP1_Projeto2
                             {
                                 black_piece_6.SetPos(pos);
                             }
-
-                            answer = false;
                             player = "W";
+                            answer = false;
+                            
                         }
 
                         else
