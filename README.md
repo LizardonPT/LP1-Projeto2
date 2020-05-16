@@ -27,7 +27,9 @@ Esses métodos verificam que peça foi escolhida e que movimentos essa peça pod
 ## Fluxograma (WIP)
 ![alt text]()
 
-### Referências (WIP)
-https://stackoverflow.com/questions/16100/convert-a-string-to-an-enum-in-c-sharp
-https://stackoverflow.com/questions/17400617/very-basic-use-of-enum-tryparse-doesnt-work
-https://stackoverflow.com/questions/1082532/how-to-tryparse-for-enum-value
+|Referência|Autor|
+| - | - |
+|António|https://stackoverflow.com/questions/17400617/very-basic-use-of-enum-tryparse-doesnt-work
+|António|https://stackoverflow.com/questions/1082532/how-to-tryparse-for-enum-value
+|Vasco Duarte| https://git-scm.com/docs/git-merge
+|Vasco Duarte| https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/single-dimensional-arrays
