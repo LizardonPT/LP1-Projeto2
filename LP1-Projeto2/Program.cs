@@ -213,7 +213,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    Player = WhiteTurn(map, Player, ref white_piece_1,
+                    Player = WhiteTurn(ref map, Player, ref white_piece_1,
                     ref white_piece_2, ref white_piece_3, ref white_piece_4,
                     ref white_piece_5, ref white_piece_6);
 
@@ -234,7 +234,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
                     
                     //Calls the method for the black turn
-                    Player = BlackTurn(map, Player,ref black_piece_1,ref black_piece_2, 
+                    Player = BlackTurn(ref map, Player,ref black_piece_1,ref black_piece_2, 
                     ref black_piece_3, ref black_piece_4, ref black_piece_5, 
                     ref black_piece_6);
 
@@ -250,7 +250,7 @@ namespace LP1_Projeto2
         }
 
         //Method to make all the black turn process steps
-        static string BlackTurn(int [,] map, string player, 
+        static string BlackTurn(ref int [,] map, string player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6)
@@ -312,7 +312,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 1;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -330,7 +330,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 2;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -348,7 +348,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 3;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -366,7 +366,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 4;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -384,7 +384,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 5;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -402,7 +402,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 6;
-                            player = BlackMovement(map, player, the_piece, 
+                            player = BlackMovement(ref map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -433,7 +433,7 @@ namespace LP1_Projeto2
         }
 
         //Method that will make the black pieces move in the game
-        static string BlackMovement( int [,] map, string player, int the_piece,
+        static string BlackMovement(ref int [,] map, string player, int the_piece,
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6) 
@@ -473,6 +473,8 @@ namespace LP1_Projeto2
             /*Will analyze the surroundings of the selected piece and say
             what's the movements the player can do*/
 
+            Console.WriteLine("Doable Movements :");
+
             //Analyze the line in x coordinates
             for(int x=-1; x<2; x++)
             {
@@ -497,11 +499,10 @@ namespace LP1_Projeto2
                                 enemy, so the player can eat the enemy piece*/
                                 if (map[pos[0]+x,pos[1]+(y*4)] == 1)
                                 {
-                                    Console.WriteLine("Doable Movements :");
                                     Console.WriteLine(
                                     $"{pos[0]+x}, {pos[1]+(y*4)}");
                                     map[pos[0]+(x),pos[1]+(y*2)] = 6;
-                                    map[pos[0]+x,pos[1]+(y*4)] = 5;
+                                    map[pos[0]+x,pos[1]+(y*4)] = 7;
                                     possible_mov += 1;
                                 }
                             }
@@ -509,7 +510,6 @@ namespace LP1_Projeto2
                             piece in the back line*/
                             if (map[pos[0]+x,pos[1]+(y*2)] == 1)
                             {
-                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0]+x}, {pos[1]+(y*2)}");
                                 map[pos[0]+x,pos[1]+(y*2)] = 5;
@@ -526,11 +526,10 @@ namespace LP1_Projeto2
                             can eat the white piece*/
                             if (map[pos[0]+(x*2),pos[1]+(y*2)] == 1)
                             {
-                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0]+(x*2)}, {pos[1]+(y*2)}");
                                 map[pos[0]+(x),pos[1]+(y)] = 6;
-                                map[pos[0]+(x*2),pos[1]+(y*2)] = 5;
+                                map[pos[0]+(x*2),pos[1]+(y*2)] = 7;
                                 possible_mov += 1;
                             }
                         }
@@ -538,7 +537,6 @@ namespace LP1_Projeto2
                         lines*/
                         else if (map[pos[0]+x,pos[1]+(y)] == 1)
                         {
-                            Console.WriteLine("Doable Movements :");
                             Console.WriteLine($"{pos[0]+x}, {pos[1]+y}");
                             map[pos[0]+x,pos[1]+y] = 5;
                             possible_mov += 1;
@@ -570,8 +568,23 @@ namespace LP1_Projeto2
                     if((coordxnumb > -1) && (coordxnumb < 5) && 
                     (coordynumb > -1) && (coordynumb < 9))
                     {
-                        if(map[coordxnumb,coordynumb] == 5)
+                        if((map[coordxnumb,coordynumb] == 5) ||
+                        (map[coordxnumb,coordynumb] == 7))
                         {
+                            if (map[coordxnumb, coordynumb] == 5)
+                            {
+                                for(int x=0; x<5; x++)
+                                {
+                                    for(int y=0; y<9; y++)
+                                    { 
+                                        if(map[x,y] == 6)
+                                        {
+                                            map[x,y] = 3;
+                                        }
+                                    }
+                                }
+                            }
+
                             /*This will put to date the position of the piece
                             in the graphic board*/
 
@@ -607,6 +620,7 @@ namespace LP1_Projeto2
                             {
                                 black_piece_6.SetPos(pos);
                             }
+
                             player = "W";
                             answer = false;
                             
@@ -633,7 +647,7 @@ namespace LP1_Projeto2
         }
 
 
-        static string WhiteTurn(int[,] map, string player, 
+        static string WhiteTurn(ref int[,] map, string player, 
             ref Pieces white_piece_1, ref Pieces white_piece_2, 
             ref Pieces white_piece_3, ref Pieces white_piece_4,
             ref Pieces white_piece_5, ref Pieces white_piece_6) //WIP string
@@ -695,7 +709,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 1;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -713,7 +727,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 2;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -731,7 +745,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 3;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -749,7 +763,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 4;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -767,7 +781,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 5;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -785,7 +799,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 6;
-                            player = WhiteMovement(map, player, the_piece,
+                            player = WhiteMovement(ref map, player, the_piece,
                             ref white_piece_1, ref white_piece_2,
                             ref white_piece_3, ref white_piece_4,
                             ref white_piece_5, ref white_piece_6);
@@ -816,7 +830,7 @@ namespace LP1_Projeto2
         }
 
         //Method that will make the black pieces move in the game
-        static string WhiteMovement(int[,] map, string player, int the_piece,
+        static string WhiteMovement(ref int[,] map, string player, int the_piece,
         ref Pieces white_piece_1, ref Pieces white_piece_2,
         ref Pieces white_piece_3, ref Pieces white_piece_4,
         ref Pieces white_piece_5, ref Pieces white_piece_6)
@@ -856,6 +870,8 @@ namespace LP1_Projeto2
             /*Will analyze the surroundings of the selected piece and say
             what's the movements the player can do*/
 
+            Console.WriteLine("Doable Movements :");
+
             //Analyze the line in x coordinates
             for (int x = -1; x < 2; x++)
             {
@@ -873,18 +889,17 @@ namespace LP1_Projeto2
                         {
                             /*Checks if there is any enemy piece in the
                             back line*/
-                            if (map[pos[0] + x, pos[1] + (y * 2)] == 3 &&
+                            if (map[pos[0] + x, pos[1] + (y * 2)] == 2 &&
                             (pos[1] + (y * 4) > -1) && (pos[1] + (y * 4) < 9))
                             {
                                 /*Checks if there is any free space after the
                                 enemy, so the player can eat the enemy piece*/
                                 if (map[pos[0] + x, pos[1] + (y * 4)] == 1)
                                 {
-                                    Console.WriteLine("Doable Movements :");
                                     Console.WriteLine(
                                     $"{pos[0] + x}, {pos[1] + (y * 4)}");
                                     map[pos[0] + (x), pos[1] + (y * 2)] = 6;
-                                    map[pos[0] + x, pos[1] + (y * 4)] = 5;
+                                    map[pos[0] + x, pos[1] + (y * 4)] = 7;
                                     possible_mov += 1;
                                 }
                             }
@@ -892,7 +907,6 @@ namespace LP1_Projeto2
                             piece in the back line*/
                             if (map[pos[0] + x, pos[1] + (y * 2)] == 1)
                             {
-                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0] + x}, {pos[1] + (y * 2)}");
                                 map[pos[0] + x, pos[1] + (y * 2)] = 5;
@@ -901,7 +915,7 @@ namespace LP1_Projeto2
                         }
                         /*Checks if its a white piece and if the surrounding
                         is in the board*/
-                        else if ((map[pos[0] + x, pos[1] + y] == 3) &&
+                        else if ((map[pos[0] + x, pos[1] + y] == 2) &&
                         ((pos[0] + (x * 2) > -1) && (pos[0] + (x * 2) < 5) &&
                         (pos[1] + (y * 2) > -1) && (pos[1] + (y * 2) < 9)))
                         {
@@ -909,11 +923,10 @@ namespace LP1_Projeto2
                             can eat the white piece*/
                             if (map[pos[0] + (x * 2), pos[1] + (y * 2)] == 1)
                             {
-                                Console.WriteLine("Doable Movements :");
                                 Console.WriteLine(
                                 $"{pos[0] + (x * 2)}, {pos[1] + (y * 2)}");
                                 map[pos[0] + (x), pos[1] + (y)] = 6;
-                                map[pos[0] + (x * 2), pos[1] + (y * 2)] = 5;
+                                map[pos[0] + (x * 2), pos[1] + (y * 2)] = 7;
                                 possible_mov += 1;
                             }
                         }
@@ -921,7 +934,6 @@ namespace LP1_Projeto2
                         lines*/
                         else if (map[pos[0] + x, pos[1] + (y)] == 1)
                         {
-                            Console.WriteLine("Doable Movements :");
                             Console.WriteLine($"{pos[0] + x}, {pos[1] + y}");
                             map[pos[0] + x, pos[1] + y] = 5;
                             possible_mov += 1;
@@ -953,8 +965,24 @@ namespace LP1_Projeto2
                     if ((coordxnumb > -1) && (coordxnumb < 5) &&
                     (coordynumb > -1) && (coordynumb < 9))
                     {
-                        if (map[coordxnumb, coordynumb] == 5)
+                        if ((map[coordxnumb, coordynumb] == 5) ||
+                        (map[coordxnumb, coordynumb] == 7))
                         {
+
+                            if (map[coordxnumb, coordynumb] == 5)
+                            {
+                                for(int x=0; x<5; x++)
+                                {
+                                    for(int y=0; y<9; y++)
+                                    {
+                                        if(map[x,y] == 2)
+                                        {
+                                            map[x,y] = 2;
+                                        }
+                                    }
+                                }
+                            }
+
                             /*This will put to date the position of the piece
                             in the graphic board*/
 
@@ -990,7 +1018,7 @@ namespace LP1_Projeto2
                             {
                                 white_piece_6.SetPos(pos);
                             }
-
+                            
                             answer = false;
                             player = "B";
                         }
@@ -1047,10 +1075,10 @@ namespace LP1_Projeto2
                     }
 
                     //This was a possible position for the chosen piece  
-                    else if(map[x,y] == 5)
+                    else if((map[x,y] == 5) || (map[x,y] == 7))
                     {
                         map[x,y] = 1;
-                        Console.Write(" ");
+                        Console.Write("+");
                     }
                     
                     //This is the position of a dead piece
@@ -1062,83 +1090,77 @@ namespace LP1_Projeto2
                         analyze[1] = y;
 
                         //This part will "delete" the piece from the choose list
-                        if(player == "W")
+                        pos = black_piece_1.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
                         {
-                            pos = black_piece_1.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_1.SetAlive(false);
-                            }
-                            pos = black_piece_2.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_2.SetAlive(false);
-                            }
-                            pos = black_piece_3.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_3.SetAlive(false);
-                            }
-                            pos = black_piece_4.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_4.SetAlive(false);
-                            }
-                            pos = black_piece_5.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_5.SetAlive(false);
-                            }
-                            pos = black_piece_6.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                black_piece_6.SetAlive(false);
-                            }
+                            black_piece_1.SetAlive(false);
                         }
-                        if(player == "B")
+                        pos = black_piece_2.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
                         {
-                            pos = white_piece_1.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_1.SetAlive(false);
-                            }
-                            pos = black_piece_2.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_2.SetAlive(false);
-                            }
-                            pos = white_piece_3.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_3.SetAlive(false);
-                            }
-                            pos = white_piece_4.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_4.SetAlive(false);
-                            }
-                            pos = black_piece_5.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_5.SetAlive(false);
-                            }
-                            pos = white_piece_6.GetPos();
-                            if((pos[0] == analyze[0]) && 
-                            (pos[1] == analyze[1]))
-                            {
-                                white_piece_6.SetAlive(false);
-                            }
+                            black_piece_2.SetAlive(false);
+                        }
+                        pos = black_piece_3.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            black_piece_3.SetAlive(false);
+                        }
+                        pos = black_piece_4.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            black_piece_4.SetAlive(false);
+                        }
+                        pos = black_piece_5.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            black_piece_5.SetAlive(false);
+                        }
+                        pos = black_piece_6.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            black_piece_6.SetAlive(false);
+                        }
+                        pos = white_piece_1.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_1.SetAlive(false);
+                        }
+                        pos = white_piece_2.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_2.SetAlive(false);
+                        }
+                        pos = white_piece_3.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_3.SetAlive(false);
+                        }
+                        pos = white_piece_4.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_4.SetAlive(false);
+                        }
+                        pos = white_piece_5.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_5.SetAlive(false);
+                        }
+                        pos = white_piece_6.GetPos();
+                        if((pos[0] == analyze[0]) && 
+                        (pos[1] == analyze[1]))
+                        {
+                            white_piece_6.SetAlive(false);
                         }
                     }
 
