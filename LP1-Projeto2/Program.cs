@@ -86,14 +86,14 @@ namespace LP1_Projeto2
 
                 else if (menu_action == 2)
                 {
-                    Console.WriteLine("-----------------------------------");
-                    Console.Write("Each player chooses a color ");
-                    Console.WriteLine("and you most decide who starts.");
-                    Console.Write("You can move only one piece per turn,");
-                    Console.Write("it can be moved in one non occupied");
-                    Console.Write("space or it can leap over an enemy piece,");
-                    Console.WriteLine("eliminating it in the process.");
-                    Console.Write("To win, you must elimate all the enemies");
+                    Console.WriteLine("------------------------------------");
+                    Console.WriteLine("Player 1 Chooses a color and plays first.");
+                    Console.Write("Each player can only move 1 piece per turn\n" +
+                        "piece can only be moved to a vacant\nadjacent point or " +
+                        "jumping trhough\nan adjacent adversary piece into a vacant" +
+                        " point\ncapturing the adversary piece in the process.\n");
+                    Console.WriteLine("To win, one of the players must have\nthe adversary " +
+                        "pieces captured or imobilized");
                     Console.WriteLine("pieces or block them.");
                     Console.WriteLine("-----------------------------------");
                 }
@@ -212,7 +212,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    white_turn(map, Player1, ref white_piece_1, ref white_piece_2, ref white_piece_3, ref white_piece_4, ref white_piece_5, ref white_piece_6);
+                    WhiteTurn(map, Player1, ref white_piece_1, ref white_piece_2, ref white_piece_3, ref white_piece_4, ref white_piece_5, ref white_piece_6);
                     
                     //Condition to see if the player with the white pieces won
                     if (Player1 == "WIN")
@@ -304,7 +304,7 @@ namespace LP1_Projeto2
                 switch (piecechosen.ToUpper())
                 {
                     case "BP1":
-                        if(black_piece_1.GetAlive())
+                        if (black_piece_1.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 1;
@@ -322,7 +322,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP2":
-                        if(black_piece_2.GetAlive())
+                        if (black_piece_2.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 2;
@@ -340,7 +340,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP3":
-                        if(black_piece_3.GetAlive())
+                        if (black_piece_3.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 3;
@@ -358,7 +358,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP4":
-                        if(black_piece_4.GetAlive())
+                        if (black_piece_4.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 4;
@@ -376,7 +376,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP5":
-                        if(black_piece_5.GetAlive())
+                        if (black_piece_5.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 5;
@@ -394,7 +394,7 @@ namespace LP1_Projeto2
                         }
 
                     case "BP6":
-                        if(black_piece_6.GetAlive())
+                        if (black_piece_6.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 6;
@@ -627,8 +627,7 @@ namespace LP1_Projeto2
         }
 
 
-
-        static string white_turn(int [,] map, string player, ref Pieces white_piece_1,
+        static string WhiteTurn(int[,] map, string player, ref Pieces white_piece_1,
             ref Pieces white_piece_2, ref Pieces white_piece_3, ref Pieces white_piece_4,
             ref Pieces white_piece_5, ref Pieces white_piece_6) //WIP string
         {
@@ -638,6 +637,7 @@ namespace LP1_Projeto2
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
+
             //Variables of the method
             bool chosen_piece = false;
             string piecechosen;
@@ -1017,7 +1017,7 @@ namespace LP1_Projeto2
         {
             //Variable
             int [] analyze = new int [2];
-            int [] pos = new int [2];
+            int [] pos;
 
             //Write the board
             for(int x=0; x<5; x++)
