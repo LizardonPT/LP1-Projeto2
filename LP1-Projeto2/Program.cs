@@ -212,7 +212,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    white_turn(map, Player1);
+                    white_turn(map, Player1, ref white_piece_1, ref white_piece_2, ref white_piece_3, ref white_piece_4, ref white_piece_5, ref white_piece_6);
                     
                     //Condition to see if the player with the white pieces won
                     if (Player1 == "WIN")
@@ -261,7 +261,7 @@ namespace LP1_Projeto2
             //Variables of the method
             bool chosen_piece = false;
             string piecechosen;
-            int the_piece = 0;
+            int the_piece;
 
             /*Checks which black pieces are alive and asks the player which one
             he wants to move*/
@@ -322,7 +322,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP2":
-                        if(black_piece_1.GetAlive())
+                        if(black_piece_2.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 2;
@@ -340,7 +340,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP3":
-                        if(black_piece_1.GetAlive())
+                        if(black_piece_3.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 3;
@@ -358,7 +358,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP4":
-                        if(black_piece_1.GetAlive())
+                        if(black_piece_4.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 4;
@@ -376,7 +376,7 @@ namespace LP1_Projeto2
                         }
                     
                     case "BP5":
-                        if(black_piece_1.GetAlive())
+                        if(black_piece_5.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 5;
@@ -394,7 +394,7 @@ namespace LP1_Projeto2
                         }
 
                     case "BP6":
-                        if(black_piece_1.GetAlive())
+                        if(black_piece_6.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 6;
@@ -628,8 +628,9 @@ namespace LP1_Projeto2
 
 
 
-
-        static void white_turn(int [,] map, string player) //WIP string
+        static string white_turn(int [,] map, string player, ref Pieces white_piece_1,
+            ref Pieces white_piece_2, ref Pieces white_piece_3, ref Pieces white_piece_4,
+            ref Pieces white_piece_5, ref Pieces white_piece_6) //WIP string
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 
@@ -637,7 +638,372 @@ namespace LP1_Projeto2
             movement choices and then check the win conditions. We return the
             color_turn to change the turn.
             */
-            return;
+            //Variables of the method
+            bool chosen_piece = false;
+            string piecechosen;
+            int the_piece;
+
+            /*Checks which black pieces are alive and asks the player which one
+            he wants to move*/
+            Console.WriteLine("Which white piece are you going to move?");
+            Console.Write("|");
+
+            if (white_piece_1.GetAlive())
+            {
+                Console.Write($" {white_piece_1.GetName()} |");
+            }
+            if (white_piece_2.GetAlive())
+            {
+                Console.Write($" {white_piece_2.GetName()} |");
+            }
+            if (white_piece_3.GetAlive())
+            {
+                Console.Write($" {white_piece_3.GetName()} |");
+            }
+            if (white_piece_4.GetAlive())
+            {
+                Console.Write($" {white_piece_4.GetName()} |");
+            }
+            if (white_piece_5.GetAlive())
+            {
+                Console.Write($" {white_piece_5.GetName()} |");
+            }
+            if (white_piece_6.GetAlive())
+            {
+                Console.Write($" {white_piece_6.GetName()} |");
+            }
+
+            Console.WriteLine("");
+
+            //Reads the input of the player
+            piecechosen = Console.ReadLine();
+
+            //Checks if the input is valid, if not, the user needs to try again
+            while (chosen_piece != true)
+            {
+                switch (piecechosen.ToUpper())
+                {
+                    case "WP1":
+                        if (white_piece_1.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 1;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "WP2":
+                        if (white_piece_2.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 2;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "WP3":
+                        if (white_piece_3.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 3;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "WP4":
+                        if (white_piece_4.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 4;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "WP5":
+                        if (white_piece_5.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 5;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "WP6":
+                        if (white_piece_6.GetAlive())
+                        {
+                            chosen_piece = true;
+                            the_piece = 6;
+                            player = WhiteMovement(map, player, the_piece,
+                            ref white_piece_1, ref white_piece_2,
+                            ref white_piece_3, ref white_piece_4,
+                            ref white_piece_5, ref white_piece_6);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That's not a valid option");
+                            piecechosen = Console.ReadLine();
+                            break;
+                        }
+
+                    case "QUIT":
+
+                        break;
+
+                    default:
+                        Console.WriteLine("That's not a valid option");
+                        piecechosen = Console.ReadLine();
+                        break;
+                }
+
+            }
+
+            return player;
+        }
+
+        //Method that will make the black pieces move in the game
+        static string WhiteMovement(int[,] map, string player, int the_piece,
+        ref Pieces white_piece_1, ref Pieces white_piece_2,
+        ref Pieces white_piece_3, ref Pieces white_piece_4,
+        ref Pieces white_piece_5, ref Pieces white_piece_6)
+        {
+            //Variables of the method
+            int[] pos = new int[2];
+            int possible_mov = 0;
+            bool answer = true;
+
+            //Gets the position in the board of the piece chosen by the player
+
+            if (the_piece == 1)
+            {
+                pos = white_piece_1.GetPos();
+            }
+            else if (the_piece == 2)
+            {
+                pos = white_piece_2.GetPos();
+            }
+            else if (the_piece == 3)
+            {
+                pos = white_piece_3.GetPos();
+            }
+            else if (the_piece == 4)
+            {
+                pos = white_piece_4.GetPos();
+            }
+            else if (the_piece == 5)
+            {
+                pos = white_piece_5.GetPos();
+            }
+            else if (the_piece == 6)
+            {
+                pos = white_piece_6.GetPos();
+            }
+
+            /*Will analyze the surroundings of the selected piece and say
+            what's the movements the player can do*/
+
+            //Analyze the line in x coordinates
+            for (int x = -1; x < 2; x++)
+            {
+                //Analyze the line in y coordinates
+                for (int y = -2; y < 3; y += 2)
+                {
+                    /*Checks if the closest spaces to the chosen piece are
+                    in the board*/
+                    if ((pos[0] + x > -1) && (pos[0] + x < 5) && (pos[1] + y > -1)
+                    && (pos[1] + y < 9))
+                    {
+                        //Checks if the chosen pice is in the backline 
+                        if ((map[pos[0] + x, pos[1] + y] == 4) && ((pos[0] == 0) ||
+                        (pos[0] == 4)))
+                        {
+                            /*Checks if there is any enemy piece in the
+                            back line*/
+                            if (map[pos[0] + x, pos[1] + (y * 2)] == 3 &&
+                            (pos[1] + (y * 4) > -1) && (pos[1] + (y * 4) < 9))
+                            {
+                                /*Checks if there is any free space after the
+                                enemy, so the player can eat the enemy piece*/
+                                if (map[pos[0] + x, pos[1] + (y * 4)] == 1)
+                                {
+                                    Console.WriteLine("Doable Movements :");
+                                    Console.WriteLine(
+                                    $"{pos[0] + x}, {pos[1] + (y * 4)}");
+                                    map[pos[0] + (x), pos[1] + (y * 2)] = 6;
+                                    map[pos[0] + x, pos[1] + (y * 4)] = 5;
+                                    possible_mov += 1;
+                                }
+                            }
+                            /*Checks if there is any free space to move the
+                            piece in the back line*/
+                            if (map[pos[0] + x, pos[1] + (y * 2)] == 1)
+                            {
+                                Console.WriteLine("Doable Movements :");
+                                Console.WriteLine(
+                                $"{pos[0] + x}, {pos[1] + (y * 2)}");
+                                map[pos[0] + x, pos[1] + (y * 2)] = 5;
+                                possible_mov += 1;
+                            }
+                        }
+                        /*Checks if its a white piece and if the surrounding
+                        is in the board*/
+                        else if ((map[pos[0] + x, pos[1] + y] == 3) &&
+                        ((pos[0] + (x * 2) > -1) && (pos[0] + (x * 2) < 5) &&
+                        (pos[1] + (y * 2) > -1) && (pos[1] + (y * 2) < 9)))
+                        {
+                            /*Checks if that surrounding is free so the player
+                            can eat the white piece*/
+                            if (map[pos[0] + (x * 2), pos[1] + (y * 2)] == 1)
+                            {
+                                Console.WriteLine("Doable Movements :");
+                                Console.WriteLine(
+                                $"{pos[0] + (x * 2)}, {pos[1] + (y * 2)}");
+                                map[pos[0] + (x), pos[1] + (y)] = 6;
+                                map[pos[0] + (x * 2), pos[1] + (y * 2)] = 5;
+                                possible_mov += 1;
+                            }
+                        }
+                        /*Checks if there is any free space in the rest of the
+                        lines*/
+                        else if (map[pos[0] + x, pos[1] + (y)] == 1)
+                        {
+                            Console.WriteLine("Doable Movements :");
+                            Console.WriteLine($"{pos[0] + x}, {pos[1] + y}");
+                            map[pos[0] + x, pos[1] + y] = 5;
+                            possible_mov += 1;
+                        }
+                    }
+                }
+            }
+
+            //Checks if the player chooses a piece with a impossible movement
+            if (possible_mov == 0)
+            {
+                Console.Write("You can't move that one... Try another one.\n");
+                return player;
+            }
+
+            else
+            {
+                while (answer)
+                {
+                    //Will demand position x and y for the movement of the piece
+                    Console.Write("x = ");
+                    string coordx = Console.ReadLine();
+                    Console.Write("y = ");
+                    string coordy = Console.ReadLine();
+                    int coordxnumb = int.Parse(coordx);
+                    int coordynumb = int.Parse(coordy);
+
+                    //Check if the input is in one of the said cases
+                    if ((coordxnumb > -1) && (coordxnumb < 5) &&
+                    (coordynumb > -1) && (coordynumb < 9))
+                    {
+                        if (map[coordxnumb, coordynumb] == 5)
+                        {
+                            /*This will put to date the position of the piece
+                            in the graphic board*/
+
+                            map[pos[0], pos[1]] = 1;
+                            pos[0] = coordxnumb;
+                            pos[1] = coordynumb;
+                            map[coordxnumb, coordynumb] = 2;
+
+                            /*This will put to date the position of the piece
+                            itself*/
+
+                            if (the_piece == 1)
+                            {
+                                white_piece_1.SetPos(pos);
+                            }
+                            else if (the_piece == 2)
+                            {
+                                white_piece_2.SetPos(pos);
+                            }
+                            else if (the_piece == 3)
+                            {
+                                white_piece_3.SetPos(pos);
+                            }
+                            else if (the_piece == 4)
+                            {
+                                white_piece_4.SetPos(pos);
+                            }
+                            else if (the_piece == 5)
+                            {
+                                white_piece_5.SetPos(pos);
+                            }
+                            else if (the_piece == 6)
+                            {
+                                white_piece_6.SetPos(pos);
+                            }
+
+                            answer = false;
+                            player = "B";
+                        }
+
+                        else
+                        {
+                            Console.Write("That's not a valid option... ");
+                            Console.WriteLine("Use one of the options");
+                        }
+
+                    }
+
+                    else
+                    {
+                        Console.Write("That's not a valid option... ");
+                        Console.WriteLine("Use one of the options");
+                    }
+                }
+
+            }
+
+            return player;
         }
 
         //To draw the board
