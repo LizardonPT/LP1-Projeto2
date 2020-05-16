@@ -98,8 +98,8 @@ namespace LP1_Projeto2
                         "piece can only be moved to a vacant\nadjacent point or " +
                         "jumping through\nan adjacent adversary piece into a vacant" +
                         " point\ncapturing the adversary piece in the process.\n");
-                    Console.WriteLine("To win, one of the players must have\nthe adversary " +
-                        "pieces captured or immobilized");
+                    Console.WriteLine("To win, one of the players must have\n" +
+                        "the adversary pieces captured or immobilized");
                     Console.WriteLine("pieces or block them.");
                     Console.WriteLine("-----------------------------------");
                 }
@@ -196,7 +196,8 @@ namespace LP1_Projeto2
         /// Contains the Game itself, checks which player plays and who wins
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="Player">Verifies which player is playing and can also close the game</param>
+        /// <param name="Player">Verifies which player is playing and can also 
+        /// close the game</param>
         static void GameLoop(int [,] map, string Player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -281,10 +282,12 @@ namespace LP1_Projeto2
         }
 
         /// <summary>
-        /// Makes all the black turn process steps and Checks which piece the player chooses to play
+        /// Makes all the black turn process steps and Checks which piece the 
+        /// player chooses to play
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="player">Allows the game to proceed to the next turn or 
+        /// finishes the game</param>
         /// <returns>Player</returns>
         static string BlackTurn(ref int [,] map, string player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
@@ -473,7 +476,8 @@ namespace LP1_Projeto2
         /// Method that will make the black pieces move in the game
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="player">Allows the game to proceed to the next turn or 
+        /// finishes the game</param>
         /// <param name="the_piece">Which Piece was Choosen</param>
         /// <returns>Player</returns>
         static string BlackMovement(ref int [,] map, string player, 
@@ -690,10 +694,12 @@ namespace LP1_Projeto2
         }
 
         /// <summary>
-        /// Makes all the white turn process steps and Checks which piece the player chooses to play
+        /// Makes all the white turn process steps and Checks which piece the 
+        /// player chooses to play
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="player">Allows the game to proceed to the next turn or 
+        /// finishes the game</param>
         /// <returns>Player</returns>
         static string WhiteTurn(ref int[,] map, string player, 
             ref Pieces white_piece_1, ref Pieces white_piece_2, 
@@ -883,7 +889,8 @@ namespace LP1_Projeto2
         /// Method that will make the white pieces move in the game
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="player">Allows the game to proceed to the next turn or 
+        /// finishes the game</param>
         /// <param name="the_piece">Which Piece was Choosen</param>
         /// <returns>Player</returns>
         static string WhiteMovement(ref int[,] map, string player, 
@@ -1103,7 +1110,8 @@ namespace LP1_Projeto2
         /// Draws the board
         /// </summary>
         /// <param name="map">Array that serves as the Board</param>
-        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="player">Allows the game to proceed to the next turn or 
+        /// finishes the game</param>
         static void Board(int [,] map, string player,
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -1172,7 +1180,8 @@ namespace LP1_Projeto2
                             analyze[0] = x;
                             analyze[1] = y;
 
-                            //This part will "delete" the piece from the choose list
+                            //This part will "delete" the piece from the choose 
+                            //list
                             pos = black_piece_1.GetPos();
                             if((pos[0] == analyze[0]) && 
                             (pos[1] == analyze[1]))
