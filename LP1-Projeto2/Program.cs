@@ -12,7 +12,7 @@ namespace LP1_Projeto2
             string menu_awnser;
             int menu_action = 0;
             bool color_selection = true;
-            string player1 = "z";
+            string player = "z";
             int [,] map = new int [5,9];
 
             Pieces black_piece_1 = new Pieces("BP1", new int[] {0,0});
@@ -145,7 +145,7 @@ namespace LP1_Projeto2
             }          
 
             //Draws the board on the console
-            Board(map, player1, ref black_piece_1, ref black_piece_2, 
+            Board(map, player, ref black_piece_1, ref black_piece_2, 
             ref black_piece_3, ref black_piece_4, ref black_piece_5, 
             ref black_piece_6,ref white_piece_1, ref white_piece_2, 
             ref white_piece_3, ref white_piece_4, ref white_piece_5, 
@@ -162,12 +162,12 @@ namespace LP1_Projeto2
 
                 if (color1 == ColorEnum.Black)
                 {
-                    player1 = "B";
+                    player = "B";
                     color_selection = false;
                 }
                 else if (color1 == ColorEnum.White)
                 {
-                    player1 = "W";
+                    player = "W";
                     color_selection = false;
                 }
                 else
@@ -177,7 +177,7 @@ namespace LP1_Projeto2
             }
 
             //The game itself WIP
-            GameLoop(map, player1, ref black_piece_1, ref black_piece_2, 
+            GameLoop(map, player, ref black_piece_1, ref black_piece_2, 
             ref black_piece_3, ref black_piece_4, ref black_piece_5, 
             ref black_piece_6, ref white_piece_1, ref white_piece_2, 
             ref white_piece_3, ref white_piece_4, ref white_piece_5, 
@@ -186,7 +186,7 @@ namespace LP1_Projeto2
         }
 
         //Method to mantain the game working
-        static void GameLoop(int [,] map, string Player1, 
+        static void GameLoop(int [,] map, string Player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6,
@@ -197,7 +197,7 @@ namespace LP1_Projeto2
             bool loop = true;
             do
             {
-                Board(map, Player1, ref black_piece_1, ref black_piece_2, 
+                Board(map, Player, ref black_piece_1, ref black_piece_2, 
                 ref black_piece_3, ref black_piece_4, ref black_piece_5, 
                 ref black_piece_6,ref white_piece_1, ref white_piece_2, 
                 ref white_piece_3, ref white_piece_4, ref white_piece_5, 
@@ -205,7 +205,7 @@ namespace LP1_Projeto2
                 /*Checks what was the player choice for the starting color and
                 and write a text saying ho's going to play that turn*/
 
-                if (Player1 == "W")
+                if (Player == "W")
                 {
 
                     Console.WriteLine("-----------------------------------");
@@ -213,19 +213,20 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    WhiteTurn(map, Player1, ref white_piece_1,
+                    WhiteTurn(map, Player, ref white_piece_1,
                     ref white_piece_2, ref white_piece_3, ref white_piece_4,
                     ref white_piece_5, ref white_piece_6);
+
                     
                     //Condition to see if the player with the white pieces won
-                    if (Player1 == "WIN")
+                    if (Player == "WIN")
                     {
                         Console.WriteLine("White wins !!!");
                         Console.WriteLine("Game Over");
                         break;
                     }
                 }
-                else if (Player1 == "B")
+                else if (Player == "B")
                 {
 
                     Console.WriteLine("-----------------------------------");
@@ -233,12 +234,12 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
                     
                     //Calls the method for the black turn
-                    BlackTurn(map, Player1,ref black_piece_1,ref black_piece_2, 
+                    BlackTurn(map, Player,ref black_piece_1,ref black_piece_2, 
                     ref black_piece_3, ref black_piece_4, ref black_piece_5, 
                     ref black_piece_6);
 
                     //Condition to see if the player with the black pieces won
-                    if (Player1 == "WIN")
+                    if (Player == "WIN")
                     {
                         Console.WriteLine("Black wins !!!");
                         Console.WriteLine("Game Over");
@@ -263,7 +264,7 @@ namespace LP1_Projeto2
 
             //Variables of the method
             bool chosen_piece = false;
-            string piecechosen;
+            string input;
             int the_piece;
 
             /*Checks which black pieces are alive and asks the player which one
@@ -299,19 +300,19 @@ namespace LP1_Projeto2
             Console.WriteLine("");
 
             //Reads the input of the player
-            piecechosen = Console.ReadLine();
+            input = Console.ReadLine();
 
             //Checks if the input is valid, if not, the user needs to try again
             while(chosen_piece != true)
             {
-                switch (piecechosen.ToUpper())
+                switch (input.ToUpper())
                 {
                     case "BP1":
                         if (black_piece_1.GetAlive())
                         {
                             chosen_piece = true;
                             the_piece = 1;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -320,7 +321,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
                     
@@ -329,7 +330,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 2;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -338,7 +339,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
                     
@@ -347,7 +348,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 3;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -356,7 +357,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
                     
@@ -365,7 +366,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 4;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -374,7 +375,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
                     
@@ -383,7 +384,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 5;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -392,7 +393,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
 
@@ -401,7 +402,7 @@ namespace LP1_Projeto2
                         {
                             chosen_piece = true;
                             the_piece = 6;
-                            player = blackmovement(map, player, the_piece, 
+                            player = BlackMovement(map, player, the_piece, 
                             ref black_piece_1, ref black_piece_2, 
                             ref black_piece_3, ref black_piece_4, 
                             ref black_piece_5, ref black_piece_6);
@@ -410,7 +411,7 @@ namespace LP1_Projeto2
                         else
                         {
                             Console.WriteLine("That's not a valid option");
-                            piecechosen = Console.ReadLine();
+                            input = Console.ReadLine();
                             break;
                         }
                     
@@ -422,7 +423,7 @@ namespace LP1_Projeto2
                     
                     default:
                         Console.WriteLine("That's not a valid option");
-                        piecechosen = Console.ReadLine();
+                        input = Console.ReadLine();
                         break;
                 }
 
@@ -432,7 +433,7 @@ namespace LP1_Projeto2
         }
 
         //Method that will make the black pieces move in the game
-        static string blackmovement( int [,] map, string player, int the_piece,
+        static string BlackMovement( int [,] map, string player, int the_piece,
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6) 
