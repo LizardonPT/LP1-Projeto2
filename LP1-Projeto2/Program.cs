@@ -37,7 +37,8 @@ namespace LP1_Projeto2
                 Console.WriteLine("          Play             ");
                 Console.WriteLine("          Rules            ");
                 Console.WriteLine("          Quit             ");
-
+                Console.WriteLine("(Please type the pretended option)");
+                Console.WriteLine("----------------------------------");
 
                 menu_awnser = Console.ReadLine();
                 MenuEnum option; 
@@ -90,10 +91,10 @@ namespace LP1_Projeto2
                     Console.WriteLine("Player 1 Chooses a color and plays first.");
                     Console.Write("Each player can only move 1 piece per turn\n" +
                         "piece can only be moved to a vacant\nadjacent point or " +
-                        "jumping trhough\nan adjacent adversary piece into a vacant" +
+                        "jumping through\nan adjacent adversary piece into a vacant" +
                         " point\ncapturing the adversary piece in the process.\n");
                     Console.WriteLine("To win, one of the players must have\nthe adversary " +
-                        "pieces captured or imobilized");
+                        "pieces captured or immobilized");
                     Console.WriteLine("pieces or block them.");
                     Console.WriteLine("-----------------------------------");
                 }
@@ -212,7 +213,9 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
 
                     //Calls the method for the white turn
-                    WhiteTurn(map, Player1, ref white_piece_1, ref white_piece_2, ref white_piece_3, ref white_piece_4, ref white_piece_5, ref white_piece_6);
+                    WhiteTurn(map, Player1, ref white_piece_1,
+                    ref white_piece_2, ref white_piece_3, ref white_piece_4,
+                    ref white_piece_5, ref white_piece_6);
                     
                     //Condition to see if the player with the white pieces won
                     if (Player1 == "WIN")
@@ -230,7 +233,7 @@ namespace LP1_Projeto2
                     Console.WriteLine("-----------------------------------");
                     
                     //Calls the method for the black turn
-                    black_turn(map, Player1,ref black_piece_1,ref black_piece_2, 
+                    BlackTurn(map, Player1,ref black_piece_1,ref black_piece_2, 
                     ref black_piece_3, ref black_piece_4, ref black_piece_5, 
                     ref black_piece_6);
 
@@ -246,7 +249,7 @@ namespace LP1_Projeto2
         }
 
         //Method to make all the black turn process steps
-        static string black_turn(int [,] map, string player, 
+        static string BlackTurn(int [,] map, string player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
         ref Pieces black_piece_5, ref Pieces black_piece_6)
@@ -413,6 +416,8 @@ namespace LP1_Projeto2
                     
                     case "QUIT":
                         
+                        Console.WriteLine("Quiting the game...");
+                        Console.WriteLine("-------------------");
                         break;
                     
                     default:
@@ -627,8 +632,9 @@ namespace LP1_Projeto2
         }
 
 
-        static string WhiteTurn(int[,] map, string player, ref Pieces white_piece_1,
-            ref Pieces white_piece_2, ref Pieces white_piece_3, ref Pieces white_piece_4,
+        static string WhiteTurn(int[,] map, string player, 
+            ref Pieces white_piece_1, ref Pieces white_piece_2, 
+            ref Pieces white_piece_3, ref Pieces white_piece_4,
             ref Pieces white_piece_5, ref Pieces white_piece_6) //WIP string
         {
             /* 
@@ -793,6 +799,8 @@ namespace LP1_Projeto2
 
                     case "QUIT":
 
+                        Console.WriteLine("Quiting the game...");
+                        Console.WriteLine("-------------------");
                         break;
 
                     default:
@@ -952,7 +960,7 @@ namespace LP1_Projeto2
                             map[pos[0], pos[1]] = 1;
                             pos[0] = coordxnumb;
                             pos[1] = coordynumb;
-                            map[coordxnumb, coordynumb] = 2;
+                            map[coordxnumb, coordynumb] = 3;
 
                             /*This will put to date the position of the piece
                             itself*/
