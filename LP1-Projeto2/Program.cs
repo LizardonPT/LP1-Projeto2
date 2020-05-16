@@ -206,6 +206,12 @@ namespace LP1_Projeto2
                 /*Checks what was the player choice for the starting color and
                 and write a text saying ho's going to play that turn*/
 
+                if (Player == "QUIT")
+                {
+                    Console.WriteLine("Game Over");
+                    break;
+                }
+
                 if (Player == "W")
                 {
                     //Condition to see if the player with the black pieces won
@@ -259,6 +265,7 @@ namespace LP1_Projeto2
                     //Condition to see if the player with the black pieces won
 
                 }
+
             } while (loop);
         }
 
@@ -432,7 +439,8 @@ namespace LP1_Projeto2
                         Console.WriteLine("-------------------");
                         Console.WriteLine("Quiting the game...");
                         Console.WriteLine("-------------------");
-                        break;
+                        player = "QUIT";
+                        return player;
                     
                     default:
                         Console.WriteLine("That's not a valid option");
@@ -830,6 +838,7 @@ namespace LP1_Projeto2
                         Console.WriteLine("Quiting the game...");
                         Console.WriteLine("-------------------");
                         chosen_piece = true;
+                        player = "QUIT";
                         break;
 
                     default:
