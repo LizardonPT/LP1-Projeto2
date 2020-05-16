@@ -24,8 +24,8 @@ O método `main` procede para a seleção de cor por parte do jogador e depois p
 O método `GameLoop` consiste num ciclo `do while` que apenas termina quando um dos jogadores ganhar. O ciclo está dividido em duas partes, turno do jogador das peças brancas e turno do jogador das peças pretas. Quando um dos turnos começa, o programa chama o método `WhiteWinVerification` ou `BlackWinVerification` conforme o turno para verificar se o adversário já ganhou o jogo. Ambos os métodos verificam se as peças do adversário já não estão em jogo. Se houver um vencedor é mostrada uma mensagem de vitória e o jogo termina, caso contrário, o jogo prossegue e o método do turno do jogador é chamado, `BlackTurn` ou `WhiteTurn` estes métodos retornam strings que mantêm o ciclo do jogo. Os métodos dos turnos pedem ao jogador que peça querem mexer consoante se as peças ainda estão ou não ainda em jogo. Se a peça ainda estiver em jogo chama os métodos `BlackMovement` e `WhiteMovement`.
 Esses métodos verificam que peça foi escolhida e que movimentos essa peça pode fazer. Se a peça não puder fazer nenhum movimento retorna para o método anterior para uma nova peça ser selecionada. Se a peça selecionada puder fazer o movimento o jogador deve escolher entre qual dos movimentos ele quer que a peça faça.
 
-## Fluxograma
-![alt text](https://cdn.discordapp.com/attachments/710889856552796210/711320391947124896/Untitled_Diagram.png)
+## Diagrama UML
+![alt text](https://cdn.discordapp.com/attachments/711342039249190992/711352511671304242/Diagrama_UML.png)
 
 |Referência|Autor|
 | - | - |
