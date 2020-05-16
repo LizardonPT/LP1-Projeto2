@@ -1,5 +1,8 @@
 namespace LP1_Projeto2
 {
+    /// <summary>
+    /// Creates the peaces with the various atributes
+    /// </summary>
     public class Pieces
     {
         private string name;

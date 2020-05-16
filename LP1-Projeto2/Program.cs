@@ -3,8 +3,13 @@ using System.Reflection;
 
 namespace LP1_Projeto2
 {
+
     class Program
     {
+        /// <summary>
+        /// Contains all the code
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
 
@@ -187,7 +192,11 @@ namespace LP1_Projeto2
             
         }
 
-        //Method to mantain the game working
+        /// <summary>
+        /// Contains the Game itself, checks which player plays and who wins
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="Player">Verifies which player is playing and can also close the game</param>
         static void GameLoop(int [,] map, string Player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -271,7 +280,12 @@ namespace LP1_Projeto2
             } while (loop);
         }
 
-        //Method to make all the black turn process steps
+        /// <summary>
+        /// Makes all the black turn process steps and Checks which piece the player chooses to play
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <returns>Player</returns>
         static string BlackTurn(ref int [,] map, string player, 
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -455,7 +469,13 @@ namespace LP1_Projeto2
             return player;
         }
 
-        //Method that will make the black pieces move in the game
+        /// <summary>
+        /// Method that will make the black pieces move in the game
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="the_piece">Which Piece was Choosen</param>
+        /// <returns>Player</returns>
         static string BlackMovement(ref int [,] map, string player, 
         int the_piece, ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -669,11 +689,16 @@ namespace LP1_Projeto2
             return player;
         }
 
-
+        /// <summary>
+        /// Makes all the white turn process steps and Checks which piece the player chooses to play
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <returns>Player</returns>
         static string WhiteTurn(ref int[,] map, string player, 
             ref Pieces white_piece_1, ref Pieces white_piece_2, 
             ref Pieces white_piece_3, ref Pieces white_piece_4,
-            ref Pieces white_piece_5, ref Pieces white_piece_6) //WIP string
+            ref Pieces white_piece_5, ref Pieces white_piece_6)
         {
             /* 
             Need to create a class for the white pieces (maybe, it depends if 
@@ -854,7 +879,13 @@ namespace LP1_Projeto2
             return player;
         }
 
-        //Method that will make the black pieces move in the game
+        /// <summary>
+        /// Method that will make the white pieces move in the game
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
+        /// <param name="the_piece">Which Piece was Choosen</param>
+        /// <returns>Player</returns>
         static string WhiteMovement(ref int[,] map, string player, 
         int the_piece, ref Pieces white_piece_1, ref Pieces white_piece_2,
         ref Pieces white_piece_3, ref Pieces white_piece_4,
@@ -1068,7 +1099,11 @@ namespace LP1_Projeto2
             return player;
         }
 
-        //To draw the board
+        /// <summary>
+        /// Draws the board
+        /// </summary>
+        /// <param name="map">Array that serves as the Board</param>
+        /// <param name="player">Allows the game to proceed to the next turn or finishes the game</param>
         static void Board(int [,] map, string player,
         ref Pieces black_piece_1, ref Pieces black_piece_2, 
         ref Pieces black_piece_3, ref Pieces black_piece_4, 
@@ -1229,7 +1264,10 @@ namespace LP1_Projeto2
             }
         }
         
-
+        /// <summary>
+        /// Verifies if the Black team Won the Game
+        /// </summary>
+        /// <returns>Boolenean to check if the team won</returns>
         static bool BlackWinVerification(ref Pieces white_piece_1,
         ref Pieces white_piece_2, ref Pieces white_piece_3,
         ref Pieces white_piece_4, ref Pieces white_piece_5,
@@ -1248,6 +1286,10 @@ namespace LP1_Projeto2
             }
         }
 
+        /// <summary>
+        /// Verifies if the White team Won the Game
+        /// </summary>
+        /// <returns>Boolenean to check if the team won</returns>
         static bool WhiteWinVerification(ref Pieces black_piece_1, 
         ref Pieces black_piece_2, ref Pieces black_piece_3, 
         ref Pieces black_piece_4, ref Pieces black_piece_5, 
