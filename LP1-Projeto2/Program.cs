@@ -157,23 +157,25 @@ namespace LP1_Projeto2
                 Console.WriteLine("Choose Starting Color");
                 Console.WriteLine("(Black or White)");
                 string player_color = Console.ReadLine();
-                ColorEnum color1 = (ColorEnum)Enum.Parse(typeof(ColorEnum), 
-                player_color, true);
-
-                if (color1 == ColorEnum.Black)
+                ColorEnum color1;
+                if (Enum.TryParse(player_color, true, out color1))
                 {
-                    player = "B";
-                    color_selection = false;
-                }
-                else if (color1 == ColorEnum.White)
-                {
-                    player = "W";
-                    color_selection = false;
+                    if (color1 == ColorEnum.Black)
+                    {
+                        player = "B";
+                        color_selection = false;
+                    }
+                    else if (color1 == ColorEnum.White)
+                    {
+                        player = "W";
+                        color_selection = false;
+                    }
+                    
                 }
                 else
-                {
-                    Console.WriteLine("Invalid Color");
-                }
+                    {
+                        Console.WriteLine("Invalid Color");
+                    }
             }
 
             //The game itself WIP
